@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      <!-- <div class="text-right flex justify-end items-center mb-2">手机查看<el-image :src="require('@/assets/enterise/tel.png')" class="w-6 h-6 ml-2" /></div> -->
       <div class="border p-6">
         <infos-table :company-infos="companyInfos" />
       </div>

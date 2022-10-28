@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      <!-- <div class="text-right flex justify-end items-center mb-2">手机查看<el-image :src="require('@/assets/enterise/tel.png')" class="w-6 h-6 ml-2" /></div> -->
       <div class="border p-6">
         <div class="flex justify-between pb-6">
           <div class="text-xl font-semibold">{{ companyInfos.comName }}</div>

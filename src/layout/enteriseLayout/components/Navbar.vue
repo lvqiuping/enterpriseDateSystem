@@ -1,7 +1,7 @@
 <template>
-  <div v-show="top" class="navbar my-4 flex justify-between">
+  <div v-show="top" class="navbar my-4 flex justify-between items-center">
     <breadcrumb class="breadcrumb-container" />
-    <!-- <div>收起搜索</div> -->
+    <div class="flex justify-between items-center">手机查看<el-image :src="eCodeImg" class="w-6 h-6 ml-2" /></div>
   </div>
 </template>
 
@@ -13,7 +13,8 @@ export default {
   },
   data() {
     return {
-      top: true
+      top: true,
+      eCodeImg: require('@/assets/layout/tel.png')
     }
   },
   watch: {
