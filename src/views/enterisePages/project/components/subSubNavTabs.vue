@@ -29,6 +29,24 @@ export default {
   components: { Information, MonomeriInformation, Person, FilingInformation, AcceptanceInformation },
   props: {
     subActiveName: { type: String, default: '' }
+  },
+  // data() {
+  //   return {
+  //     subActiveNames: ''
+  //   }
+  // },
+  watch: {
+    'subActiveName': {
+      immediate: true,
+      handler(newVal, oldValue) {
+        console.log('newVal', newVal)
+        this.subActiveName = newVal
+      }
+    }
+  },
+  created() {
+    console.log('2导航', this.subActiveName)
   }
+
 }
 </script>

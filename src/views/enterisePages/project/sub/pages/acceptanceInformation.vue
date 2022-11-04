@@ -58,6 +58,12 @@ export default {
           type: 'text'
         },
         {
+          label: '实际竣工验收时间',
+          value: 'xh',
+          show: true,
+          type: 'text'
+        },
+        {
           label: '详情',
           value: 'xh',
           show: true,

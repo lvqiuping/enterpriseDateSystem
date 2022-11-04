@@ -20,6 +20,15 @@ export default {
       activeNames: ''
     }
   },
+  watch: {
+    'activeName': {
+      immediate: true,
+      handler(newVal, oldValue) {
+        this.activeNames = newVal
+      }
+    }
+  },
+
   created() {
     this.activeNames = this.activeName // vue规范，要接收再修改其中的值,不能直接修改props的值
   },
