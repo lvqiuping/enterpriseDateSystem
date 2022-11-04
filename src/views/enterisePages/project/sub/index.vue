@@ -41,14 +41,6 @@ export default {
       }
     }
   },
-  // watch: {
-  //   'activeName': {
-  //     immediate: true,
-  //     handler(newVal, oldValue) {
-  //       this.activeName = newVal
-  //     }
-  //   }
-  // },
   created() {
     this.infos()
   },

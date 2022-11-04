@@ -6,8 +6,8 @@
     </div>
     <div class="grid grid-cols-2 text-center border">
       <div v-for="(item, index) in InfosList" :key="index" :class="showCompanyName? 'grid grid-cols-2 text-center': 'grid grid-cols-3 text-center'">
-        <div style="background-color: #f8f8f8" class="border-b flex justify-center items-center font-semibold p-2">{{ item }}</div>
-        <div class="border-b flex justify-center items-center p-2" :class="showCompanyName ?'':'col-span-2 border-b flex justify-center items-center p-2'">{{ companyInfos[index] }}</div>
+        <div style="background-color: #f8f8f8" class="border-b border-r flex justify-center items-center font-semibold p-2">{{ item }}</div>
+        <div class="border-b border-r flex justify-center items-center p-2" :class="showCompanyName ?'':'col-span-2 border-b flex justify-center items-center p-2'">{{ companyInfos[index] }}</div>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="border border-b-0">
+    <div class="border border-b-0" v-if="isSearch">
       <div class="flex justify-between items-center h-14 bg-gray-100 px-4"> <div class="">筛选</div> <div>重置条件</div> </div>
       <search-form
         :search-form="searchForm"
@@ -61,7 +61,8 @@ export default {
     searchForm: { type: Object, default: null },
     loading: { type: Boolean, default: false },
     // 特别操作
-    isShow: { type: Boolean, default: true }
+    isShow: { type: Boolean, default: true },
+    isSearch: { type: Boolean, default: true }
 
   },
   data() {

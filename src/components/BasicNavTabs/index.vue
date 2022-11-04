@@ -44,7 +44,7 @@ export default {
 .sub ::v-deep .el-tabs__item.is-active{
   border: 1px solid #409eff;
   color: #409eff;
-  padding-left: 20px!important;
+  padding: 0 20px!important;
 }
 .sub ::v-deep .el-tabs__item{
   font-size: 16px;
