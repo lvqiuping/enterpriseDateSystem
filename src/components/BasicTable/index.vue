@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="border border-b-0" v-if="isSearch">
-      <div class="flex justify-between items-center h-14 bg-gray-100 px-4"> <div class="">筛选</div> <div>重置条件</div> </div>
+    <div v-if="isSearch" class="border border-b-0">
+      <div class="flex justify-between items-center h-14 bg-gray-100 px-4"> <div class="">筛选</div> <div></div> </div>
       <search-form
         :search-form="searchForm"
         :is-show="isShow"

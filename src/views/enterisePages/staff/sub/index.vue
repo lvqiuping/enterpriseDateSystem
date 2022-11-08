@@ -5,31 +5,18 @@
         <infos-table :company-infos="companyInfos" />
       </div>
       <div class="subnavbox my-8">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane v-for="(item, index) in tabsList" :key="index" :name="item.name" lazy>
-            <span slot="label"><el-image
-              style="width: 30px; height: 30px"
-              :src="item.url"
-              :fit="item.fit"
-              class="mr-4"
-            /> {{ item.label }}</span>
-
-            <sub-nav-table v-if="activeName === 'performance'" :company-name="companyName" />
-            <sub-nav-infos v-else-if="activeName === 'registration'" :company-name="companyName" />
-          </el-tab-pane>
-        </el-tabs>
+        <sub-nav-tabs :tabs-list="tabsList" :active-name="activeName" />
       </div>
     </div>
   </div>
 </template>
 <script>
-import InfosTable from '@/views/enterisePages/staff/components/infosTable.vue'
-import SubNavTable from '@/views/enterisePages/staff/components/subNavTable.vue'
-import SubNavInfos from '@/views/enterisePages/staff/components/subNavInfos.vue'
+import InfosTable from '@/views/enterisePages/staff/sub/pages/infosTable.vue'
+import SubNavTabs from '@/views/enterisePages/staff/components/subNavTabs.vue'
 import { Get } from '@/api/enterise.js'
 export default {
   name: 'EInfos',
-  components: { InfosTable, SubNavTable, SubNavInfos },
+  components: { InfosTable, SubNavTabs },
   data() {
     return {
       companyName: this.$route.query.companyName.trim(),
@@ -37,8 +24,25 @@ export default {
         { index: 0, label: '执业注册信息', name: 'registration', url: require('@/assets/staff/s2.png'), fit: 'contain' },
         { index: 1, label: '个人工程业绩', name: 'performance', url: require('@/assets/staff/s1.png'), fit: 'contain' }
       ],
-      activeName: 'qualifications',
+      activeName: 'registration',
       companyInfos: {}
+      // InfosList: {
+      //   comCapital: '证件类型',
+      //   comLegalPerson: '证件号码',
+      //   comNumber: '照片',
+      //   comStatus: '性别',
+      //   comStartDate: '毕业院校',
+      //   comOrganizeNumber: '出生日期',
+      //   comType: '民族',
+      //   comRegisterOffice: '籍贯',
+      //   comIndustry: '联系电话',
+      //   a: '学历',
+      //   b: '专业',
+      //   c: '联系电话',
+      //   d: '政治面貌',
+      //   e: '现居地',
+      //   f: '注册证书所在单位名称'
+      // }
     }
   },
   created() {
@@ -55,6 +59,10 @@ export default {
     // tabs
     handleClick(tab, event) {
       this.activeName = tab.name
+    },
+    // tabs
+    getActiveSubNameEmit(v) {
+      this.activeName = v
     }
   }
 }

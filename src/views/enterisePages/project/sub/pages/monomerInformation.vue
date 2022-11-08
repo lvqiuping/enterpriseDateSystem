@@ -20,7 +20,7 @@ import Pagination from '@/components/BasicTable/Pagination.vue'
 import { GetPageList } from '@/api/enterise.js'
 import { getList } from '@/utils'
 export default {
-  name: 'EInfos',
+  name: 'MonomerInformation',
   components: { BasicTable, Pagination },
   data() {
     return {

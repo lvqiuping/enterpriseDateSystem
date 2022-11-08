@@ -1,98 +1,100 @@
 <template>
-  <div>
+  <div class="app-container">
     <basic-table
       :table-title="tableTitle"
       :table-data="tableData"
       :loading="loading"
       :is-search="false"
-      @refresh="getPageList()"
+      class="mt-4"
     >
       <template v-slot:check="scope">
-        <el-button type="text">查看</el-button>
+        <el-button type="text">预览</el-button>
       </template>
     </basic-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageIndex" :limit.sync="listQuery.pageSize" @pagination="getPageList()" />
   </div>
 </template>
 <script>
-import BasicTable from '@/components/BasicTable/index.vue'
 import Pagination from '@/components/BasicTable/Pagination.vue'
-import { GetPageList } from '@/api/enterise.js'
+import BasicTable from '@/components/BasicTable/index.vue'
 import { getList } from '@/utils'
+import { GetPageCmpZiZhis } from '@/api/enterise.js'
 export default {
-  name: 'FilingInformation',
+  name: 'Qualifications',
   components: { BasicTable, Pagination },
   data() {
     return {
       loading: false,
+      tableData: null,
+      total: 0,
+      listQuery: {
+        pageIndex: 1,
+        pageSize: 15,
+        companyName: '',
+        perType: 3 // 初始值
+      },
       tableTitle: [
         {
-          label: '数据等级',
+          label: '序号',
           value: 'xh',
           show: true,
           type: 'text'
         },
         {
-          label: '实际造价 （万元）',
-          value: 'comName',
-          show: true,
-          type: 'router',
-          path: 'pInfos'
-        },
-        {
-          label: '实际面积 （平方米）',
-          value: 'xh',
+          label: '资质类别',
+          value: 'zzRange',
           show: true,
           type: 'text'
         },
         {
-          label: '省级竣工备案编号',
-          value: 'xh',
+          label: '资质证书号',
+          value: 'zzCode',
           show: true,
           type: 'text'
         },
         {
-          label: '实际竣工验收备案时间 ',
-          value: 'xh',
+          label: '资质名称',
+          value: 'zzName',
           show: true,
           type: 'text'
         },
         {
-          label: '竣工验收备案编号',
-          value: 'xh',
+          label: '发证日期',
+          value: 'zzBegTime',
           show: true,
           type: 'text'
         },
         {
-          label: '施工许可证编号',
-          value: 'xh',
+          label: '发证有效期',
+          value: 'zzEndTime',
           show: true,
           type: 'text'
         },
         {
-          label: '详情',
+          label: '发证机关',
+          value: 'zzOffice',
+          show: true,
+          type: 'text'
+        },
+        {
+          label: '预览',
           value: 'xh',
           show: true,
           type: 'slot',
           slot: 'check'
         }
-      ],
-      tableData: null,
-      total: 0,
-      listQuery: {
-        pageIndex: 1,
-        pageSize: 15
-      }
+      ]
     }
   },
   created() {
+    console.log(this.$route.query.companyName.trim())
+    this.listQuery.companyName = this.$route.query.companyName.trim()
     this.getPageList()
   },
   methods: {
     // 获取表格数据
     getPageList() {
-      this.loading = true
-      getList(this, GetPageList, this.listQuery)
+      getList(this, GetPageCmpZiZhis, this.listQuery)
     }
   }
 }

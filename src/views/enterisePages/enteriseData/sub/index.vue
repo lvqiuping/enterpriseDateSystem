@@ -7,7 +7,7 @@
           <div>无</div>
         </div>
         <div class="border">
-          <infos-table :company-infos="companyInfos" />
+          <basic-infos :company-infos="companyInfos" :infos-list="InfosList" :special-col="true" />
           <div class="flex justify-around my-8">
             <div class="flex justify-start">
               <el-image :src="require('@/assets/enterise/h1.png')" fit="contain" class="w-16 h-16 ml-2" />
@@ -41,25 +41,21 @@
         </div>
       </div>
       <div class="subnavbox my-8">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane v-for="(item, index) in tabsList" :key="index" :label="item.label" :name="item.name" lazy>
-            <sub-nav-table :tabs-name="activeName" :company-name="companyName" />
-          </el-tab-pane>
-        </el-tabs>
+        <sub-nav-tabs :tabs-list="tabsList" :active-name="activeName" @getActiveSubNameEmit="getActiveSubNameEmit" />
       </div>
     </div>
   </div>
 </template>
 <script>
-import InfosTable from '@/views/enterisePages/enteriseData/components/infosTable.vue'
-import SubNavTable from '@/views/enterisePages/enteriseData/components/subNavTable.vue'
+import BasicInfos from '@/components/BasicInfos/index.vue'
 import { Get } from '@/api/enterise.js'
+import SubNavTabs from '@/views/enterisePages/enteriseData/components/subNavTabs.vue'
 export default {
   name: 'EInfos',
-  components: { InfosTable, SubNavTable },
+  components: { BasicInfos, SubNavTabs },
   data() {
     return {
-      companyName: this.$route.query.companyName.trim(),
+      // companyName: this.$route.query.companyName.trim(),
       tabsList: [
         { index: 0, label: '企业资质资格', name: 'qualifications' },
         { index: 1, label: '注册人员', name: 'join' },
@@ -68,8 +64,22 @@ export default {
         { index: 4, label: '职称人员', name: 'perTitle' },
         { index: 5, label: '其他人员', name: 'other' }
       ],
-      activeName: 'project',
-      companyInfos: {}
+      activeName: 'qualifications',
+      companyInfos: {},
+      InfosList: {
+        comCapital: '注册资本',
+        comLegalPerson: '企业法定代表人',
+        comNumber: '统一社会信用代码',
+        comRegisterOffice: '登记状态',
+        comStatus: '成立日期',
+        comStartDate: '组织机构代码',
+        comOrganizeNumber: '企业类型',
+        comType: '企业注册属地',
+        a: '行业',
+        b: '登记机关',
+        c: '营业期限',
+        d: '所属地区'
+      }
     }
   },
   created() {
@@ -84,8 +94,8 @@ export default {
       })
     },
     // tabs
-    handleClick(tab, event) {
-      this.activeName = tab.name
+    getActiveSubNameEmit(v) {
+      this.activeName = v
     }
   }
 }

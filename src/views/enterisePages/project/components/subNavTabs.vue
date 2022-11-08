@@ -29,7 +29,7 @@
         @getActiveSubName="getCompletionAcceptanceActiveName"
       />
       <div>
-        <sub-sub-nav-tabs :sub-active-name="subActiveName" />
+        <sub-sub-nav-tabs :sub-active-name="completionAcceptanceActiveName" />
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@ export default {
         { index: 1, label: '参与单位及相关负责人', name: 'person' },
         { index: 2, label: '单体信息', name: 'monomerInformation' }
       ],
-      subActiveName: '',
+      subActiveName: 'information',
       completionAcceptanceTabsList: [
         { index: 0, label: '竣工验收备案信息', name: 'filingInformation' },
         { index: 1, label: '竣工验收信息', name: 'acceptanceInformation' }
@@ -61,12 +61,28 @@ export default {
       completionAcceptanceActiveName: 'filingInformation'
     }
   },
-  created() {
-    if (this.activeName === 'completionAcceptance') {
-      this.subActiveName = 'filingInformation'
-    } else if (this.activeName === 'basicInformation') {
-      this.subActiveName = 'information'
+  watch: {
+    'subActiveName': {
+      immediate: true,
+      handler(newVal, oldValue) {
+        console.log('newVal', newVal)
+        this.subActiveName = newVal
+      }
+    },
+    'completionAcceptanceActiveName': {
+      immediate: true,
+      handler(newVal, oldValue) {
+        console.log('newVal', newVal)
+        this.completionAcceptanceActiveName = newVal
+      }
     }
+  },
+  created() {
+    // if (this.activeName === 'completionAcceptance') {
+    //   this.subActiveName = 'filingInformation'
+    // } else if (this.activeName === 'basicInformation') {
+    //   this.subActiveName = 'information'
+    // }
   },
   methods: {
     getActiveSubName(v) {

@@ -7,11 +7,7 @@
       :loading="loading"
       class="mt-4"
       @searchFormEmit2="searchFormEmit2"
-    >
-      <template v-slot:call="scope">
-        <i class="el-icon-phone-outline text-blue-400 text-xl" />
-      </template>
-    </basic-table>
+    />
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageIndex" :limit.sync="listQuery.pageSize" @pagination="getPageList(tabsName)" />
   </div>
 </template>
@@ -19,11 +15,12 @@
 import Pagination from '@/components/BasicTable/Pagination.vue'
 import BasicTable from '@/components/BasicTable/index.vue'
 import { getList } from '@/utils'
-import { GetPageCmpZiZhis, GetPageCompanyProjects, GetPageCompanyContacts, GetPageCmpPerTitles, GetPageCmpPersonsByType } from '@/api/enterise.js'
+import { GetPageCmpZiZhis } from '@/api/enterise.js'
 export default {
-  name: 'SubTable',
+  name: 'Join',
   components: { BasicTable, Pagination },
   props: {
+    tabsName: { type: String, default: '' },
     companyName: { type: String, default: '' }
   },
   data() {
@@ -45,31 +42,31 @@ export default {
           type: 'text'
         },
         {
-          label: '项目名称',
-          value: 'xh',
+          label: '姓名',
+          value: 'id',
           show: true,
           type: 'text'
         },
         {
-          label: '项目属地',
-          value: 'projectAddress',
-          show: true,
-          type: 'text'
-        },
-        {
-          label: '项目编码',
+          label: '身份证号',
           value: 'projectName',
           show: true,
           type: 'text'
         },
         {
-          label: '项目类别',
+          label: '注册类别',
+          value: 'projectAddress',
+          show: true,
+          type: 'text'
+        },
+        {
+          label: '注册号（执行印章号）',
           value: 'projectType',
           show: true,
           type: 'text'
         },
         {
-          label: '建设单位',
+          label: '注册专业',
           value: 'buildCompanyName',
           show: true,
           type: 'text'
@@ -82,13 +79,18 @@ export default {
         size: 'default',
         fields: [
           {
-            type: 'input',
-            label: '项目属地',
+            type: 'text',
+            label: '注册监理工程师',
             name: 'address'
           },
           {
-            type: 'input',
-            label: '项目类别',
+            type: 'text',
+            label: '一级注册建造师',
+            name: 'projectType'
+          },
+          {
+            type: 'text',
+            label: '一级注册造价工程师',
             name: 'projectType'
           }
         ]
@@ -97,25 +99,15 @@ export default {
   },
   methods: {
     // 获取表格数据
-    getPageList(name) {
-      if (name === 'qualifications') {
-        getList(this, GetPageCmpZiZhis, this.listQuery)
-      } else if (name === 'project') {
-        getList(this, GetPageCompanyProjects, this.listQuery)
-      } else if (name === 'concat') {
-        getList(this, GetPageCompanyContacts, this.listQuery)
-      } else if (name === 'perTitle') {
-        getList(this, GetPageCmpPerTitles, this.listQuery)
-      } else if (name === 'other') {
-        getList(this, GetPageCmpPersonsByType, this.listQuery)
-      }
+    getPageList() {
+      getList(this, GetPageCmpZiZhis, this.listQuery)
     },
     // suosuo
     searchFormEmit2(v) {
       v.companyName = this.companyName
       this.listQuery.pageIndex = 1
       this.listQuery = Object.assign({}, this.listQuery, v)
-      this.getPageList(this.tabsName)
+      this.getPageList()
     }
   }
 }

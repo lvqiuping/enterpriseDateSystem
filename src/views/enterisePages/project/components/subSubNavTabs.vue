@@ -30,23 +30,14 @@ export default {
   props: {
     subActiveName: { type: String, default: '' }
   },
-  // data() {
-  //   return {
-  //     subActiveNames: ''
-  //   }
-  // },
   watch: {
     'subActiveName': {
       immediate: true,
       handler(newVal, oldValue) {
-        console.log('newVal', newVal)
+        console.log('newValzhe', newVal)
         this.subActiveName = newVal
       }
     }
-  },
-  created() {
-    console.log('2导航', this.subActiveName)
   }
-
 }
 </script>

@@ -7,7 +7,7 @@
           <div>无</div>
         </div>
         <div class="border">
-          <infos-table :company-infos="companyInfos" />
+          <!-- <infos-table :company-infos="companyInfos" /> -->
           <div class="flex justify-around my-8">
             <div class="flex justify-start">
               <el-image :src="require('@/assets/enterise/h1.png')" fit="contain" class="w-16 h-16 ml-2" />
@@ -51,8 +51,8 @@
   </div>
 </template>
 <script>
-import InfosTable from '@/views/enterisePages/enteriseData/components/infosTable.vue'
-import SubNavTable from '@/views/enterisePages/enteriseData/components/subNavTable.vue'
+// import InfosTable from '@/views/enterisePages/enteriseData/components/infosTable.vue'
+// import SubNavTable from '@/views/enterisePages/enteriseData/components/subNavTable.vue'
 import { Get } from '@/api/enterise.js'
 export default {
   name: 'EInfos',

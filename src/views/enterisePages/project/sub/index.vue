@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div class="border p-6">
+      <div class="border">
         <basic-infos :company-infos="companyInfos" :infos-list="InfosList" />
       </div>
       <div class="subnavbox my-8">
@@ -15,7 +15,7 @@ import BasicInfos from '@/components/BasicInfos/index.vue'
 import SubNavTabs from '@/views/enterisePages/project/components/subNavTabs.vue'
 import { Get } from '@/api/enterise.js'
 export default {
-  name: 'EInfos',
+  name: 'ProjectSub',
   components: { BasicInfos, SubNavTabs },
   data() {
     return {

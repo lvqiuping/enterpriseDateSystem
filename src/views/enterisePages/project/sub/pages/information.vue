@@ -1,13 +1,13 @@
 <template>
   <div>
-    <basic-infos :infos-list="InfosList" :company-infos="companyInfos" :show-company-name="false" />
+    <basic-infos :infos-list="InfosList" :company-infos="companyInfos" :show-company-name="false" :cols-two="false" />
   </div>
 </template>
 <script>
 import BasicInfos from '@/components/BasicInfos/index.vue'
 import { Get } from '@/api/enterise.js'
 export default {
-  name: 'EInfos',
+  name: 'Information',
   components: { BasicInfos },
   data() {
     return {

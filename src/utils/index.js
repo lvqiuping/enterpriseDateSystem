@@ -130,6 +130,7 @@ export function param2Obj(url) {
 export function getList(obj, api, params) {
   api(params).then(response => {
     if (response.statusCode === 200) {
+      console.log(response)
       obj.loading = false
       obj.tableData = response.data.pageList
       obj.total = response.data.totalRowCount

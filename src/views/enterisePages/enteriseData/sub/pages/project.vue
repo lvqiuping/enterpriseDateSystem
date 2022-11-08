@@ -3,9 +3,9 @@
     <basic-table
       :table-title="tableTitle"
       :table-data="tableData"
-      :loading="loading"
       :search-form="searchForm"
-      @refresh="getPageList()"
+      :loading="loading"
+      class="mt-4"
       @searchFormEmit2="searchFormEmit2"
     />
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageIndex" :limit.sync="listQuery.pageSize" @pagination="getPageList()" />
@@ -14,37 +14,23 @@
 <script>
 import Pagination from '@/components/BasicTable/Pagination.vue'
 import BasicTable from '@/components/BasicTable/index.vue'
-import { GetPageList } from '@/api/enterise.js'
 import { getList } from '@/utils'
+import { GetPageCompanyProjects } from '@/api/enterise.js'
 export default {
-  name: 'Project',
+  name: 'SubTable',
   components: { BasicTable, Pagination },
   data() {
     return {
       loading: false,
-      searchForm: {
-        show: true,
-        expend: true,
-        title: '表格筛选',
-        size: 'default',
-        fields: [
-          {
-            type: 'input',
-            label: '信用代码',
-            name: 'companyNumber'
-          },
-          {
-            type: 'input',
-            label: '企业名称',
-            name: 'companyName'
-          },
-          {
-            type: 'input',
-            label: '法定代表人',
-            name: 'legalPerson'
-          }
-        ]
+      tableData: null,
+      total: 0,
+      listQuery: {
+        pageIndex: 1,
+        pageSize: 15,
+        companyName: '',
+        perType: 3 // 初始值
       },
+      tabName: this.tabsName, // 为了监听
       tableTitle: [
         {
           label: '序号',
@@ -53,55 +39,69 @@ export default {
           type: 'text'
         },
         {
-          label: '项目名称',
-          value: 'comName',
+          label: '项目编码',
+          value: 'id',
           show: true,
-          type: 'router',
-          path: 'pInfos'
+          type: 'text'
         },
         {
-          label: '项目编号',
-          value: 'xh',
+          label: '项目名称',
+          value: 'projectName',
+          show: true,
+          type: 'text'
+        },
+        {
+          label: '项目属地',
+          value: 'projectAddress',
           show: true,
           type: 'text'
         },
         {
           label: '项目类别',
-          value: 'xh',
+          value: 'projectType',
           show: true,
           type: 'text'
         },
         {
           label: '建设单位',
-          value: 'xh',
-          show: true,
-          type: 'text'
-        },
-        {
-          label: '地址',
-          value: 'xh',
+          value: 'buildCompanyName',
           show: true,
           type: 'text'
         }
       ],
-      tableData: null,
-      total: 0,
-      listQuery: {
-        pageIndex: 1,
-        pageSize: 15
+      searchForm: {
+        show: true,
+        expend: true,
+        title: '表格筛选',
+        size: 'default',
+        fields: [
+          {
+            type: 'input',
+            label: '项目属地',
+            name: 'address'
+          },
+          {
+            type: 'input',
+            label: '项目类别',
+            name: 'projectType'
+          }
+        ]
       }
     }
   },
   created() {
+    console.log(this.$route.query.companyName.trim())
+    this.listQuery.companyName = this.$route.query.companyName.trim()
     this.getPageList()
   },
   methods: {
     // 获取表格数据
     getPageList() {
-      this.loading = true
-      getList(this, GetPageList, this.listQuery)
+      getList(this, GetPageCompanyProjects, this.listQuery)
     },
+    // suosuo
     searchFormEmit2(v) {
+      v.companyName = this.companyName
       this.listQuery.pageIndex = 1
       this.listQuery = Object.assign({}, this.listQuery, v)
       this.getPageList()

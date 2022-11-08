@@ -1,26 +1,31 @@
 <template>
-  <div>
+  <div class="app-container">
     <basic-table
       :table-title="tableTitle"
       :table-data="tableData"
       :loading="loading"
       :is-search="false"
-      @refresh="getPageList()"
     />
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageIndex" :limit.sync="listQuery.pageSize" @pagination="getPageList()" />
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageIndex" :limit.sync="listQuery.pageSize" @pagination="getPageList(tabsName)" />
   </div>
 </template>
 <script>
-import BasicTable from '@/components/BasicTable/index.vue'
 import Pagination from '@/components/BasicTable/Pagination.vue'
-import { GetPageList } from '@/api/enterise.js'
+import BasicTable from '@/components/BasicTable/index.vue'
 import { getList } from '@/utils'
+import { GetPageList } from '@/api/enterise.js'
 export default {
-  name: 'Person',
+  name: 'SubTable',
   components: { BasicTable, Pagination },
   data() {
     return {
       loading: false,
+      tableData: null,
+      total: 0,
+      listQuery: {
+        pageIndex: 1,
+        pageSize: 15
+      },
       tableTitle: [
         {
           label: '序号',
@@ -29,43 +34,36 @@ export default {
           type: 'text'
         },
         {
-          label: '企业承担角色',
-          value: 'comName',
-          show: true,
-          type: 'router',
-          path: 'pInfos'
-        },
-        {
-          label: '企业名称',
+          label: '项目名称',
           value: 'xh',
           show: true,
           type: 'text'
         },
         {
-          label: '企业统一社会信用代码',
-          value: 'xh',
+          label: '项目属地',
+          value: 'projectAddress',
           show: true,
           type: 'text'
         },
         {
-          label: '负责人姓名',
-          value: 'xh',
+          label: '项目编码',
+          value: 'projectName',
           show: true,
           type: 'text'
         },
         {
-          label: '负责人证件号',
-          value: 'xh',
+          label: '项目类别',
+          value: 'projectType',
+          show: true,
+          type: 'text'
+        },
+        {
+          label: '建设单位',
+          value: 'buildCompanyName',
           show: true,
           type: 'text'
         }
-      ],
-      tableData: null,
-      total: 0,
-      listQuery: {
-        pageIndex: 1,
-        pageSize: 15
-      }
+      ]
     }
   },
   created() {
