@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-if="showCompanyName" class="flex justify-between p-6">
+    <div v-if="showCompanyName" class="flex justify-between pb-6">
       <div class="text-xl font-semibold">{{ companyInfos.comName }}</div>
-      <div>无</div>
+      <div></div>
     </div>
     <div class="grid grid-cols-2 text-center">
       <div v-for="(item, index) in InfosList" :key="index" :class="colsTwo? 'grid grid-cols-2 text-center': 'grid grid-cols-3 text-center'">

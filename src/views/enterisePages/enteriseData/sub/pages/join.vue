@@ -5,6 +5,7 @@
       :table-data="tableData"
       :search-form="searchForm"
       :loading="loading"
+      :is-show="false"
       class="mt-4"
       @searchFormEmit2="searchFormEmit2"
     />
@@ -20,8 +21,7 @@ export default {
   name: 'Join',
   components: { BasicTable, Pagination },
   props: {
-    tabsName: { type: String, default: '' },
-    companyName: { type: String, default: '' }
+    tabsName: { type: String, default: '' }
   },
   data() {
     return {
@@ -31,8 +31,8 @@ export default {
       listQuery: {
         pageIndex: 1,
         pageSize: 15,
-        companyName: this.companyName,
-        perType: 3 // 初始值
+        companyName: '',
+        radioJoin: 0
       },
       tableTitle: [
         {
@@ -79,23 +79,30 @@ export default {
         size: 'default',
         fields: [
           {
-            type: 'text',
+            type: 'radio',
             label: '注册监理工程师',
-            name: 'address'
+            name: 'radioJoin',
+            value: 0
           },
           {
-            type: 'text',
+            type: 'radio',
             label: '一级注册建造师',
-            name: 'projectType'
+            name: 'radioJoin',
+            value: 1
           },
           {
-            type: 'text',
+            type: 'radio',
             label: '一级注册造价工程师',
-            name: 'projectType'
+            name: 'radioJoin',
+            value: 2
           }
         ]
       }
     }
+  },
+  created() {
+    this.listQuery.companyName = this.$route.query.companyName.trim()
+    this.getPageList()
   },
   methods: {
     // 获取表格数据
@@ -104,7 +111,7 @@ export default {
     },
     // suosuo
     searchFormEmit2(v) {
-      v.companyName = this.companyName
+      v.companyName = this.listQuery.companyName
       this.listQuery.pageIndex = 1
       this.listQuery = Object.assign({}, this.listQuery, v)
       this.getPageList()

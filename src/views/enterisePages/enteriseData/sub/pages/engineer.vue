@@ -18,10 +18,13 @@
 import Pagination from '@/components/BasicTable/Pagination.vue'
 import BasicTable from '@/components/BasicTable/index.vue'
 import { getList } from '@/utils'
-import { GetPageCmpZiZhis } from '@/api/enterise.js'
+import { GetPageCmpPerTitles } from '@/api/enterise.js'
 export default {
   name: 'Qualifications',
   components: { BasicTable, Pagination },
+  props: {
+    perType: { type: Number, default: 0 }
+  },
   data() {
     return {
       loading: false,
@@ -31,7 +34,7 @@ export default {
         pageIndex: 1,
         pageSize: 15,
         companyName: '',
-        perType: 3 // 初始值
+        perType: this.perType // 初始值
       },
       tableTitle: [
         {
@@ -42,13 +45,13 @@ export default {
         },
         {
           label: '姓名',
-          value: 'xh',
+          value: 'perName',
           show: true,
           type: 'text'
         },
         {
           label: '性别',
-          value: 'perName',
+          value: 'xh',
           show: true,
           type: 'text'
         },
@@ -61,12 +64,6 @@ export default {
         {
           label: '职称类别',
           value: 'title',
-          show: true,
-          type: 'text'
-        },
-        {
-          label: '职称等级(初)',
-          value: 'xh',
           show: true,
           type: 'text'
         },
@@ -85,15 +82,23 @@ export default {
       ]
     }
   },
+  watch: {
+    'perType': {
+      immediate: true,
+      handler(newVal, oldValue) {
+        this.listQuery.perType = newVal
+        this.getPageList(this.listQuery)
+      }
+    }
+  },
   created() {
-    console.log(this.$route.query.companyName.trim())
     this.listQuery.companyName = this.$route.query.companyName.trim()
     this.getPageList()
   },
   methods: {
     // 获取表格数据
     getPageList() {
-      getList(this, GetPageCmpZiZhis, this.listQuery)
+      getList(this, GetPageCmpPerTitles, this.listQuery)
     }
   }
 }

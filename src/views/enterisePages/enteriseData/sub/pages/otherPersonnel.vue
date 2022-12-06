@@ -18,10 +18,13 @@
 import Pagination from '@/components/BasicTable/Pagination.vue'
 import BasicTable from '@/components/BasicTable/index.vue'
 import { getList } from '@/utils'
-import { GetPageCmpZiZhis } from '@/api/enterise.js'
+import { GetPageCmpPersonsByType } from '@/api/enterise.js'
 export default {
   name: 'Qualifications',
   components: { BasicTable, Pagination },
+  props: {
+    perType: { type: Number, default: 0 }
+  },
   data() {
     return {
       loading: false,
@@ -31,7 +34,7 @@ export default {
         pageIndex: 1,
         pageSize: 15,
         companyName: '',
-        perType: 3 // 初始值
+        perType: this.perType // 初始值
       },
       tableTitle: [
         {
@@ -59,31 +62,19 @@ export default {
           type: 'text'
         },
         {
-          label: '技术等级',
+          label: '安全管理资格类别',
           value: 'xh',
           show: true,
           type: 'text'
         },
         {
-          label: '专业工种',
+          label: '资格有效期',
           value: 'ValidYears',
           show: true,
           type: 'text'
         },
         {
-          label: '发证单位',
-          value: 'AwardUnit',
-          show: true,
-          type: 'text'
-        },
-        {
-          label: '发证日期',
-          value: 'AwardUnit',
-          show: true,
-          type: 'text'
-        },
-        {
-          label: '截止日期',
+          label: '发证机关',
           value: 'AwardUnit',
           show: true,
           type: 'text'
@@ -97,7 +88,18 @@ export default {
       ]
     }
   },
+  watch: {
+    'perType': {
+      immediate: true,
+      handler(newVal, oldValue) {
+        console.log('perType?????', newVal)
+        this.listQuery.perType = newVal
+        this.getPageList(this.listQuery)
+      }
+    }
+  },
   created() {
+    console.log('perType', this.perType)
     console.log(this.$route.query.companyName.trim())
     this.listQuery.companyName = this.$route.query.companyName.trim()
     this.getPageList()
@@ -105,7 +107,7 @@ export default {
   methods: {
     // 获取表格数据
     getPageList() {
-      getList(this, GetPageCmpZiZhis, this.listQuery)
+      getList(this, GetPageCmpPersonsByType, this.listQuery)
     }
   }
 }

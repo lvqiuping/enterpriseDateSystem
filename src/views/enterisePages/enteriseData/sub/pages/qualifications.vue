@@ -29,9 +29,7 @@ export default {
       total: 0,
       listQuery: {
         pageIndex: 1,
-        pageSize: 15,
-        companyName: '',
-        perType: 3 // 初始值
+        pageSize: 15
       },
       tableTitle: [
         {
@@ -87,12 +85,12 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.query.companyName.trim())
     this.listQuery.companyName = this.$route.query.companyName.trim()
     this.getPageList()
   },
   methods: {
     // 获取表格数据
+    // todo 数据字段
     getPageList() {
       getList(this, GetPageCmpZiZhis, this.listQuery)
     }

@@ -11,9 +11,9 @@
               @keyup.enter.native="searching()"
             />
           </el-form-item>
-          <el-form-item v-if="field.type === 'text'" class="flex mr-4">
-            <el-radio-group v-model="temp[field.name]" @change="getTextForm">
-              <el-radio-button :label="field.label" plain />
+          <el-form-item v-if="field.type === 'radio'" class="flex mr-4">
+            <el-radio-group v-model="temp[field.name]" @change="getRadioForm">
+              <el-radio-button :label="field.value" plain>{{ field.label }}</el-radio-button>
             </el-radio-group>
           </el-form-item>
         </div>
@@ -36,13 +36,6 @@ export default {
   data() {
     return {
       temp: {
-        companyNumber: '',
-        companyName: '',
-        legalPerson: '',
-        address: '',
-        projectType: '',
-        perType: 3,
-        perType2: '安全三类人员'
       },
       pickerOptions: {
         shortcuts: [
@@ -112,28 +105,23 @@ export default {
     }
   },
   methods: {
-    getTextForm(v) {
-      if (v === '安全三类人员') {
-        this.temp.perType = 3
-      } else if (v === '专业岗位人员') {
-        this.temp.perType = 4
-      } else if (v === '技术工人') {
-        this.temp.perType = 5
-      } else if (v === '特种作业人员') {
-        this.temp.perType = 6
-      }
+    getRadioForm(v) {
+      this.temp.radioJoin = v
       this.searching(this.temp)
     },
     searching(v) {
       this.$emit('searchFormEmit', v || this.temp)
     },
     resetTemp() {
+      // 这里最好不要写具体的字段，看看怎么优化
       this.temp = {
         companyNumber: '',
         companyName: '',
         legalPerson: '',
         address: '',
-        projectType: ''
+        projectType: '',
+        name: '',
+        mobile: ''
       }
       this.searching(this.temp)
     }

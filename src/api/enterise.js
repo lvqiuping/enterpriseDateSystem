@@ -53,3 +53,10 @@ export function GetPageCmpPersonsByType(query) {
     params: query
   })
 }
+export function GetCmpSummaryCount(query) {
+  return request({
+    url: '/api/Company/GetCmpSummaryCount',
+    method: 'get',
+    params: query
+  })
+}

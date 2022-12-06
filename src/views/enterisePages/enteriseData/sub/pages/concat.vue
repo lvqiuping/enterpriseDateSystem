@@ -4,8 +4,9 @@
       :table-title="tableTitle"
       :table-data="tableData"
       :loading="loading"
-      :is-search="false"
+      :search-form="searchForm"
       class="mt-4"
+      @searchFormEmit2="searchFormEmit2"
     >
       <template v-slot:call="scope">
         <i class="el-icon-phone-outline text-blue-400 text-xl" />
@@ -30,8 +31,7 @@ export default {
       listQuery: {
         pageIndex: 1,
         pageSize: 15,
-        companyName: '',
-        perType: 3 // 初始值
+        companyName: ''
       },
       tableTitle: [
         {
@@ -65,11 +65,28 @@ export default {
           type: 'slot',
           slot: 'call'
         }
-      ]
+      ],
+      searchForm: {
+        show: true,
+        expend: true,
+        title: '表格筛选',
+        size: 'default',
+        fields: [
+          {
+            type: 'input',
+            label: '姓名',
+            name: 'name'
+          },
+          {
+            type: 'input',
+            label: '联系方式',
+            name: 'mobile'
+          }
+        ]
+      }
     }
   },
   created() {
-    console.log(this.$route.query.companyName.trim())
     this.listQuery.companyName = this.$route.query.companyName.trim()
     this.getPageList()
   },
@@ -80,7 +97,7 @@ export default {
     },
     // suosuo
     searchFormEmit2(v) {
-      v.companyName = this.companyName
+      v.companyName = this.listQuery.companyName
       this.listQuery.pageIndex = 1
       this.listQuery = Object.assign({}, this.listQuery, v)
       this.getPageList()

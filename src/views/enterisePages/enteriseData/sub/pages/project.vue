@@ -27,8 +27,7 @@ export default {
       listQuery: {
         pageIndex: 1,
         pageSize: 15,
-        companyName: '',
-        perType: 3 // 初始值
+        companyName: ''
       },
       tabName: this.tabsName, // 为了监听
       tableTitle: [
@@ -90,7 +89,6 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.query.companyName.trim())
     this.listQuery.companyName = this.$route.query.companyName.trim()
     this.getPageList()
   },
@@ -101,7 +99,7 @@ export default {
     },
     // suosuo
     searchFormEmit2(v) {
-      v.companyName = this.companyName
+      v.companyName = this.listQuery.companyName
       this.listQuery.pageIndex = 1
       this.listQuery = Object.assign({}, this.listQuery, v)
       this.getPageList()
