@@ -211,6 +211,7 @@ $light_gray:#eee;
     height: 440px;
     background-color: #fff;
     border-radius: 5%;
+    
   }
 
   .tips {
