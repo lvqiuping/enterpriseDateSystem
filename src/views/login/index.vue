@@ -1,54 +1,58 @@
 <template>
-  <div class="login-container" :style="{backgroundImage: `url(${bgIamge})`}">
-    <div class="mt-8"><img class="mx-auto" src="@/assets/login/l1.png" alt="建筑市场服务平台" style="width: 400px"></div>
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form px-20 py-6 m-auto mt-20 shadow-lg" auto-complete="on" label-position="left">
-      <div class="text-center text-2xl my-4 font-semibold" style="color: #2db0fd">用户登录</div>
-      <el-form-item prop="userName">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
-        <el-input
-          ref="userName"
-          v-model.trim="loginForm.userName"
-          placeholder="请输入用户名"
-          name="userName"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
-      </el-form-item>
+  <div>
+    <div class="login-container" :style="{backgroundImage: `url(${bgIamge})`}">
+      <div class="pt-2"><img class="mx-auto" src="@/assets/login/l1.png" alt="建筑市场服务平台" style="width: 400px"></img></div>
+      <div style="margin-top: 150px;" class="m-auto">
+        <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form px-20 py-6 m-auto shadow-lg" auto-complete="on" label-position="left">
+          <div class="text-center text-2xl my-4 font-semibold" style="color: #2db0fd">用户登录</div>
+          <el-form-item prop="userName">
+            <span class="svg-container">
+              <svg-icon icon-class="user" />
+            </span>
+            <el-input
+              ref="userName"
+              v-model.trim="loginForm.userName"
+              placeholder="请输入用户名"
+              name="userName"
+              type="text"
+              tabindex="1"
+              auto-complete="on"
+            />
+          </el-form-item>
 
-      <el-form-item prop="password">
-        <span class="svg-container">
-          <svg-icon icon-class="password" />
-        </span>
-        <el-input
-          :key="passwordType"
-          ref="password"
-          v-model="loginForm.password"
-          :type="passwordType"
-          placeholder="请输入密码"
-          name="password"
-          tabindex="2"
-          auto-complete="on"
-          @keyup.enter.native="handleLogin"
-        />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-        </span>
-      </el-form-item>
-      <div style="margin-bottom: 1rem;">
-        <Vcode :show="isShow" @success="onSuccess" @close="onClose" @fail="onFail" />
-        <el-button
-          style="border: 1px solid rgba(255, 255, 255, 0.5);
-    border: 1px solid #DFDFDF;
-    border-radius: 5px;
-    color: #bbb;"
-          @click="startCaptcha"
-        >点击验证</el-button>
+          <el-form-item prop="password">
+            <span class="svg-container">
+              <svg-icon icon-class="password" />
+            </span>
+            <el-input
+              :key="passwordType"
+              ref="password"
+              v-model="loginForm.password"
+              :type="passwordType"
+              placeholder="请输入密码"
+              name="password"
+              tabindex="2"
+              auto-complete="on"
+              @keyup.enter.native="handleLogin"
+            />
+            <span class="show-pwd" @click="showPwd">
+              <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+            </span>
+          </el-form-item>
+          <div style="margin-bottom: 1rem;">
+            <Vcode :show="isShow" @success="onSuccess" @close="onClose" @fail="onFail" />
+            <el-button
+              style="border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid #DFDFDF;
+            border-radius: 5px;
+            color: #bbb;"
+              @click="startCaptcha"
+            >点击验证</el-button>
+          </div>
+          <el-button :loading="loading" type="primary" round class="w-full" @click.native.prevent="handleLogin">登 录</el-button>
+        </el-form>
       </div>
-      <el-button :loading="loading" type="primary" round class="w-full" @click.native.prevent="handleLogin">登 录</el-button>
-    </el-form>
+    </div>
   </div>
 </template>
 
@@ -197,21 +201,16 @@ $dark_gray:#889aa4;
 $light_gray:#eee;
 
 .login-container {
-  min-height: 100%;
   width: 100%;
-  overflow: hidden;
+  height: 100vh;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 116%;
+  background-size: 120% 100%;
   .login-form {
-    position: relative;
     width: 440px;
     height: 440px;
-    max-width: 100%;
-    overflow: hidden;
     background-color: #fff;
     border-radius: 5%;
-    margin-top: 100px;
   }
 
   .tips {

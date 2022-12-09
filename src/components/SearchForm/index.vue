@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form v-show="searchForm.show" ref="searchForm" :model="temp" label-position="" label-width="" class="flex mt-6 ml-4">
+    <el-form v-show="searchForm.show" ref="searchForm" :model="temp" label-position="" label-width="" class="flex mt-6 mx-6">
       <template>
         <div v-for="(field, index) in searchForm.fields" :key="index">
           <el-form-item v-if="field.type === 'input'" :label="field.label" class="flex mr-4">

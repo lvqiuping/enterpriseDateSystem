@@ -5,8 +5,12 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken, getRefreshToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
+/* Layout */
+import Layout from '@/layout/enteriseLayout'
+import Cookies from 'js-cookie'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 const whiteList = ['/login'] // no redirect whitelist
+let isAddRouter = false
 router.beforeEach(async(to, from, next) => {
   // start progress bar
   NProgress.start()
@@ -23,6 +27,53 @@ router.beforeEach(async(to, from, next) => {
     } else {
       const hasGetUserInfo = store.getters.userName
       if (hasGetUserInfo) {
+        if (Cookies.get('isAdmin') !== 'false') {
+          if (!isAddRouter) {
+            isAddRouter = true
+            router.addRoutes([
+              {
+                path: '/userManagement',
+                component: Layout,
+                redirect: '/userManagement/index',
+                alwaysShow: false,
+                name: '用户管理',
+                meta: {
+                  title: '用户管理',
+                  icon: 'el-icon-user'
+                },
+                hidden: false,
+                children: [{
+                  path: 'userManagement',
+                  name: 'UserManagement',
+                  component: () => import('@/views/enterisePages/userManagement/index'),
+                  meta: { title: '用户管理', icon: 'el-icon-user' }
+                }]
+              }
+            ])
+
+            router.options.routes.push({
+              path: '/userManagement',
+              component: Layout,
+              redirect: '/userManagement/index',
+              alwaysShow: false,
+              name: '用户管理',
+              meta: {
+                title: '用户管理',
+                icon: 'el-icon-user'
+              },
+              hidden: false,
+              children: [{
+                path: 'userManagement',
+                name: 'UserManagement',
+                component: () => import('@/views/enterisePages/userManagement/index'),
+                meta: { title: '用户管理', icon: 'el-icon-user' }
+              }]
+            }
+            )
+          }
+        } else {
+          console.log('不是admin')
+        }
         next()
       } else {
         try {

@@ -55,11 +55,11 @@ import Join from '@/views/enterisePages/enteriseData/sub/pages/join.vue'
 import Project from '@/views/enterisePages/enteriseData/sub/pages/project.vue'
 import Concat from '@/views/enterisePages/enteriseData/sub/pages/concat.vue'
 import OtherPersonnel from '@/views/enterisePages/enteriseData/sub/pages/otherPersonnel.vue'
-import Engineer from '@/views/enterisePages/enteriseData/sub/pages/engineer.vue'
+// import Engineer from '@/views/enterisePages/enteriseData/sub/pages/engineer.vue'
 
 export default {
   name: 'SubNavTabs',
-  components: { BasicNavTabs, Qualifications, Project, Concat, Join, OtherPersonnel, Engineer },
+  components: { BasicNavTabs, Qualifications, Project, Concat, Join, OtherPersonnel },
   props: {
     tabsList: { type: Array, default: null },
     activeName: { type: String, default: '' }

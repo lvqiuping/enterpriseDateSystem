@@ -1,12 +1,19 @@
 <template>
   <div>
-    <div v-if="isSearch" class="border border-b-0">
-      <!-- <div class="flex justify-between items-center h-14 bg-gray-100 px-4"> <div class="">筛选</div> <div></div> </div> -->
-      <search-form
-        :search-form="searchForm"
-        :is-show="isShow"
-        @searchFormEmit="searchFormEmit"
-      />
+    <div class="flex justify-between border border-b-0">
+      <div v-if="isOperationBtn">
+        <operation-button
+          :button-group="buttonGroup"
+          @operateEmit="operateEmit"
+        />
+      </div>
+      <div v-if="isSearch">
+        <search-form
+          :search-form="searchForm"
+          :is-show="isShow"
+          @searchFormEmit="searchFormEmit"
+        />
+      </div>
     </div>
     <el-table
       v-if="showTable"
@@ -39,6 +46,18 @@
           <div v-else-if="item.type == 'router'">
             <router-link :to="{path: item.path, query: {companyName: scope.row[item.value]} }" class="text-blue-400">{{ scope.row[item.value] }}</router-link>
           </div>
+          <div v-else-if="item.type == 'options'">
+            <el-button
+              v-for="(btn, btnKey) in item.options"
+              :key="btnKey"
+              :type="btn.type && btn.type !== '' ? btn.type: 'primary'"
+              :icon="btn.icon ? btn.icon : ''"
+              size="mini"
+              @click="btn.clickEvent(scope.row)"
+            >
+              {{ btn.text }}
+            </el-button>
+          </div>
         </template>
       </el-table-column>
     </el-table>
@@ -46,11 +65,12 @@
 </template>
 <script>
 import SearchForm from '@/components/SearchForm/index.vue'
+import OperationButton from '@/components/OperationButton/index.vue'
+// import DataForm from '@/components/DataForm/index.vue'
 export default {
   name: 'BasicTable',
-  components: { SearchForm },
+  components: { SearchForm, OperationButton },
   props: {
-    // 基本
     tableTitle: { type: Array, default: Array },
     tableData: { type: Array, default: Array },
     operates: { type: Object, default: Object },
@@ -60,10 +80,10 @@ export default {
     showTable: { type: Boolean, default: true },
     searchForm: { type: Object, default: null },
     loading: { type: Boolean, default: false },
-    // 特别操作
     isShow: { type: Boolean, default: true },
-    isSearch: { type: Boolean, default: true }
-
+    isSearch: { type: Boolean, default: true },
+    buttonGroup: { type: Object, default: null },
+    isOperationBtn: { type: Boolean, default: false }
   },
   data() {
     return {
@@ -77,6 +97,9 @@ export default {
     }
   },
   methods: {
+    operateEmit(v) {
+      this.$emit('operateEmit2', v)
+    },
     rowClassName({ row, rowIndex }) {
       row.xh = rowIndex + 1
     },

@@ -128,6 +128,7 @@ export default {
     ]),
     routes() {
       // todo
+      console.log('this.$router.options.routes', this.$router.options.routes)
       return this.$router.options.routes
     },
     activeMenu() {

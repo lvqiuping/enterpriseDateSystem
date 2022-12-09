@@ -14,8 +14,6 @@ export function logout(data) {
     data: data
   })
 }
-// 前
-
 export function getUserList(query) {
   return request({
     url: '/api/User/GetPageList',
@@ -23,18 +21,11 @@ export function getUserList(query) {
     params: query
   })
 }
-
-export function DisableUser(data) {
+export function UpdateStatus(data) {
   return request({
-    url: '/api/User/DisableUser?' + data,
-    method: 'post'
-  })
-}
-
-export function EnableUser(data) {
-  return request({
-    url: '/api/User/EnableUser?' + data,
-    method: 'post'
+    url: '/api/User/UpdateStatus',
+    method: 'post',
+    data: data
   })
 }
 export function UpdatePassword(data) {
@@ -44,18 +35,10 @@ export function UpdatePassword(data) {
     data: data
   })
 }
-export function DeleteUsers(data) {
+export function AddUser(data) {
   return request({
-    url: '/api/User/DeleteUsers',
+    url: '/api/User/AddUser',
     method: 'post',
     data: data
   })
 }
-export function getInfo(token) {
-  return request({
-    url: '/WeatherForecast',
-    method: 'get',
-    params: { token }
-  })
-}
-
