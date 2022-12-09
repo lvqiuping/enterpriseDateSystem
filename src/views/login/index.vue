@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div style="height: 100vh; display: flex; flex-direction: column;justify-content: center; align-items: center;">
+    <div class="pt-8"><img class="mx-auto" src="@/assets/login/l1.png" alt="建筑市场服务平台" style="width: 400px"></img></div>
     <div class="login-container" :style="{backgroundImage: `url(${bgIamge})`}">
-      <div class="pt-2"><img class="mx-auto" src="@/assets/login/l1.png" alt="建筑市场服务平台" style="width: 400px"></img></div>
-      <div style="margin-top: 150px;" class="m-auto">
+      <div class="m-auto">
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form px-20 py-6 m-auto shadow-lg" auto-complete="on" label-position="left">
           <div class="text-center text-2xl my-4 font-semibold" style="color: #2db0fd">用户登录</div>
           <el-form-item prop="userName">
@@ -202,10 +202,12 @@ $light_gray:#eee;
 
 .login-container {
   width: 100%;
-  height: 100vh;
+  // height: 100vh;
+  height: 806px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 120% 100%;
+  display: flex;
   .login-form {
     width: 440px;
     height: 440px;
