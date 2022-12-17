@@ -82,6 +82,9 @@
                   <el-dropdown-item divided @click.native="logout">
                     <span style="display:block;">注销</span>
                   </el-dropdown-item>
+                  <el-dropdown-item divided @click.native="changePassword">
+                    <span style="display:block;">修改密码</span>
+                  </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
@@ -89,6 +92,15 @@
         </div>
       </div>
     </div>
+    <el-dialog :title="'修改密码'" :visible.sync="dialogPasswordVisible" top="3%">
+      <div class="el-dialog-div">
+        <password-form
+          :passwordtemp="passwordtemp"
+          @createPassword="createPassword"
+          @dialogPasswordVisibleEmit="dialogPasswordVisibleEmit"
+        />
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -96,11 +108,20 @@
 import { mapGetters } from 'vuex'
 import SidebarItem from './Sidebar/SidebarItem'
 import variables from '@/styles/variables.scss'
+import PasswordForm from '@/views/enterisePages/userManagement/components/passwordForm.vue'
+import { UpdatePassword } from '@/api/user.js'
+import { TipsBox } from '@/utils/feedback.js'
+
 export default {
   name: 'AppHeader',
-  components: { SidebarItem },
+  components: { SidebarItem, PasswordForm },
   data() {
     return {
+      dialogPasswordVisible: false,
+      passwordtemp: {
+        newPassword: '',
+        userId: ''
+      },
       keyword: '',
       select: '',
       topImg: require('@/assets/layout/l2.png'),
@@ -124,11 +145,11 @@ export default {
   computed: {
     ...mapGetters([
       'sidebar',
-      'userName'
+      'userName',
+      'userId'
     ]),
     routes() {
       // todo
-      console.log('this.$router.options.routes', this.$router.options.routes)
       return this.$router.options.routes
     },
     activeMenu() {
@@ -151,6 +172,30 @@ export default {
     }
   },
   methods: {
+    changePassword() {
+      this.resetTemp()
+      this.passwordtemp.userId = this.userId
+      this.dialogPasswordVisible = true
+    },
+    resetTemp() {
+      this.passwordtemp = {
+        newPassword: '',
+        userId: ''
+      }
+    },
+    createPassword(v) {
+      UpdatePassword(v).then((res) => {
+        this.loading = true
+        if (res.statusCode === 200) {
+          this.loading = false
+          TipsBox('success', res.data)
+          this.dialogPasswordVisible = false
+        }
+      })
+    },
+    dialogPasswordVisibleEmit(v) {
+      this.dialogPasswordVisible = v
+    },
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)

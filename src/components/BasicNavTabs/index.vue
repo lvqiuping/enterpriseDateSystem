@@ -2,14 +2,14 @@
   <div>
     <div :class="isSecondNav? 'sub' : ''">
       <el-tabs v-model="activeNames" @tab-click="handleClick">
-        <el-tab-pane v-for="(item, index) in tabsList" :key="index" :label="item.label" :name="item.name" lazy>
+        <el-tab-pane v-for="(item, index) in tabsList" :key="index" :label="item.count? item.name + '('+item.count+')' : item.name" :name="String(item.name)" :data-id="item.id" lazy>
           <span v-if="item.url" slot="label">
             <el-image
               style="width: 30px; height: 30px"
               :src="item.url"
               :fit="item.fit"
               class="mr-4"
-            /> {{ item.label }}</span>
+            /> {{ item.count }}</span>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -38,12 +38,11 @@ export default {
   },
 
   created() {
-    console.log('this.activeName ', this.activeName)
     this.activeNames = this.activeName // vue规范，要接收再修改其中的值,不能直接修改props的值
   },
   methods: {
     handleClick(tab, event) {
-      this.$emit('getActiveSubName', tab.name) // 这步会修改值
+      this.$emit('getActiveSubName', tab) // 这步会修改值
     }
   }
 }

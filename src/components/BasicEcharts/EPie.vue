@@ -24,7 +24,7 @@ export default {
     },
     height: {
       type: String,
-      default: '300px'
+      default: '600px'
     },
     pieChartData: {
       type: Array,
@@ -51,6 +51,18 @@ export default {
   methods: {
     initChart(pieChartData) {
       this.chart = echarts.init(document.getElementById(this.id))
+      const color2 = ['#0083FF',
+        '#FFBE57',
+        '#60D8A9',
+        '#FF5A47',
+        '#3C5FA1',
+        '#9d9d9d',
+        '#4ee9eb',
+        '#a28efd',
+        '#fcb5a1',
+        '#845b5e'
+      ]
+
       this.chart.setOption({
         tooltip: {
           trigger: 'item'
@@ -63,13 +75,15 @@ export default {
           {
             name: '人员资质',
             type: 'pie',
-            color: [ // 此系列是自己的调色盘
-              '#0083FF',
-              '#FF5A47',
-              '#3C5FA1',
-              '#36C7E2',
-              '#FEDC7B'
-            ],
+            minAngle: 20, // 文字间隙
+            // color: color2,
+            itemStyle: {
+              normal: {
+                color: item => {
+                  return color2[item.dataIndex % (color2.length)] // 用完调色盘的颜色会取余调色盘重复用
+                }
+              }
+            },
             radius: ['40%', '60%'], // 内圈外圈的大小
             center: ['50%', '40%', '50%', '50%'], // 控制图的位置
             avoidLabelOverlap: false,

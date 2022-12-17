@@ -46,9 +46,9 @@ export function GetPageCmpPerTitles(query) {
     params: query
   })
 }
-export function GetPageCmpPersonsByType(query) {
+export function GetPageCmpPerOthers(query) {
   return request({
-    url: '/api/Company/GetPageCmpPersonsByType',
+    url: '/api/Company/GetPageCmpPerOthers',
     method: 'get',
     params: query
   })
@@ -56,6 +56,20 @@ export function GetPageCmpPersonsByType(query) {
 export function GetCmpSummaryCount(query) {
   return request({
     url: '/api/Company/GetCmpSummaryCount',
+    method: 'get',
+    params: query
+  })
+}
+export function GetRegGroupMajors(query) {
+  return request({
+    url: '/api/Company/GetRegGroupMajors',
+    method: 'get',
+    params: query
+  })
+}
+export function GetPageCmpRegMajors(query) {
+  return request({
+    url: '/api/Company/GetPageCmpRegMajors',
     method: 'get',
     params: query
   })

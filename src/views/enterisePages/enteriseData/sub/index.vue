@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="subnavbox my-8">
-        <sub-nav-tabs :tabs-list="tabsList" :active-name="activeName" @getActiveSubNameEmit="getActiveSubNameEmit" />
+        <sub-nav-tabs :tabs-list="tabsList" :active-name="activeName" :company-name="CompanyName" @getActiveSubNameEmit="getActiveSubNameEmit" />
       </div>
     </div>
   </div>
@@ -51,15 +51,16 @@ export default {
   components: { BasicInfos, SubNavTabs },
   data() {
     return {
+      CompanyName: '',
       tabsList: [
-        { index: 0, label: '企业资质资格', name: 'qualifications' },
-        { index: 1, label: '注册人员', name: 'join' },
-        { index: 2, label: '工程项目', name: 'project' },
-        { index: 3, label: '联系方式', name: 'concat' },
-        { index: 4, label: '职称人员', name: 'perTitle' },
-        { index: 5, label: '其他人员', name: 'other' }
+        { id: 0, name: '企业资质资格' },
+        { id: 1, name: '注册人员' },
+        { id: 2, name: '工程项目' },
+        { id: 3, name: '联系方式' },
+        { id: 4, name: '职称人员' },
+        { id: 5, name: '其他人员' }
       ],
-      activeName: 'qualifications',
+      activeName: '企业资质资格',
       companyInfos: {},
       summaryCount: {},
       InfosList: {
@@ -79,22 +80,23 @@ export default {
     }
   },
   created() {
+    this.CompanyName = this.$route.query.companyName.trim()
     this.infos()
   },
   methods: {
     // 公司信息
     infos() {
       this.loading = true
-      Get({ companyName: this.$route.query.companyName.trim() }).then(response => {
+      Get({ companyName: this.CompanyName }).then(response => {
         this.companyInfos = response.data
       })
-      GetCmpSummaryCount({ companyName: this.$route.query.companyName.trim() }).then(response => {
+      GetCmpSummaryCount({ companyName: this.CompanyName }).then(response => {
         this.summaryCount = response.data
       })
     },
     // tabs
     getActiveSubNameEmit(v) {
-      this.activeName = v
+      this.activeName = v.label
     }
   }
 }

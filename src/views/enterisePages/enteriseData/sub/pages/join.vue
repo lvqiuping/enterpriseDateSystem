@@ -3,11 +3,8 @@
     <basic-table
       :table-title="tableTitle"
       :table-data="tableData"
-      :search-form="searchForm"
       :loading="loading"
-      :is-show="false"
       class="mt-4"
-      @searchFormEmit2="searchFormEmit2"
     />
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageIndex" :limit.sync="listQuery.pageSize" @pagination="getPageList(tabsName)" />
   </div>
@@ -16,12 +13,13 @@
 import Pagination from '@/components/BasicTable/Pagination.vue'
 import BasicTable from '@/components/BasicTable/index.vue'
 import { getList } from '@/utils'
-import { GetPageCmpZiZhis } from '@/api/enterise.js'
+import { GetPageCmpRegMajors } from '@/api/enterise.js'
 export default {
   name: 'Join',
   components: { BasicTable, Pagination },
   props: {
-    tabsName: { type: String, default: '' }
+    tabsName: { type: String, default: '' },
+    activeId: { type: Number, default: 0 }
   },
   data() {
     return {
@@ -32,7 +30,7 @@ export default {
         pageIndex: 1,
         pageSize: 15,
         companyName: '',
-        radioJoin: 0
+        MajorParentId: ''
       },
       tableTitle: [
         {
@@ -43,78 +41,40 @@ export default {
         },
         {
           label: '姓名',
-          value: 'id',
+          value: 'perName',
           show: true,
           type: 'text'
         },
         {
           label: '身份证号',
-          value: 'projectName',
-          show: true,
-          type: 'text'
-        },
-        {
-          label: '注册类别',
-          value: 'projectAddress',
+          value: 'perIdCard',
           show: true,
           type: 'text'
         },
         {
           label: '注册号（执行印章号）',
-          value: 'projectType',
+          value: 'cerNumber',
           show: true,
           type: 'text'
         },
         {
           label: '注册专业',
-          value: 'buildCompanyName',
+          value: 'cerMajor',
           show: true,
           type: 'text'
         }
-      ],
-      searchForm: {
-        show: true,
-        expend: true,
-        title: '表格筛选',
-        size: 'default',
-        fields: [
-          {
-            type: 'radio',
-            label: '注册监理工程师',
-            name: 'radioJoin',
-            value: 0
-          },
-          {
-            type: 'radio',
-            label: '一级注册建造师',
-            name: 'radioJoin',
-            value: 1
-          },
-          {
-            type: 'radio',
-            label: '一级注册造价工程师',
-            name: 'radioJoin',
-            value: 2
-          }
-        ]
-      }
+      ]
     }
   },
   created() {
     this.listQuery.companyName = this.$route.query.companyName.trim()
+    this.listQuery.MajorParentId = this.activeId
     this.getPageList()
   },
   methods: {
     // 获取表格数据
     getPageList() {
-      getList(this, GetPageCmpZiZhis, this.listQuery)
-    },
-    // suosuo
-    searchFormEmit2(v) {
-      v.companyName = this.listQuery.companyName
-      this.listQuery.pageIndex = 1
-      this.listQuery = Object.assign({}, this.listQuery, v)
-      this.getPageList()
+      getList(this, GetPageCmpRegMajors, this.listQuery)
     }
   }
 }

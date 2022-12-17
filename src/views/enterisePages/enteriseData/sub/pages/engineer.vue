@@ -23,7 +23,7 @@ export default {
   name: 'Qualifications',
   components: { BasicTable, Pagination },
   props: {
-    perType: { type: Number, default: 0 }
+    titleLevel: { type: Number, default: 0 }
   },
   data() {
     return {
@@ -34,7 +34,7 @@ export default {
         pageIndex: 1,
         pageSize: 15,
         companyName: '',
-        perType: this.perType // 初始值
+        titleLevel: this.titleLevel // 初始值
       },
       tableTitle: [
         {
@@ -51,7 +51,7 @@ export default {
         },
         {
           label: '性别',
-          value: 'xh',
+          value: 'gender',
           show: true,
           type: 'text'
         },
@@ -63,30 +63,31 @@ export default {
         },
         {
           label: '职称类别',
-          value: 'title',
+          value: 'levelName',
           show: true,
           type: 'text'
         },
         {
-          label: '所属企业',
-          value: 'xh',
-          show: true,
-          type: 'text'
-        },
-        {
-          label: '查看',
-          value: 'xh',
+          label: '专业',
+          value: 'majorName',
           show: true,
           type: 'text'
         }
+        // ,
+        // {
+        //   label: '查看',
+        //   value: 'xh',
+        //   show: true,
+        //   type: 'text'
+        // }
       ]
     }
   },
   watch: {
-    'perType': {
+    'titleLevel': {
       immediate: true,
       handler(newVal, oldValue) {
-        this.listQuery.perType = newVal
+        this.listQuery.titleLevel = newVal
         this.getPageList(this.listQuery)
       }
     }

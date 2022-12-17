@@ -187,7 +187,7 @@ export default {
           type: 'text'
         },
         {
-          label: '职称类别',
+          label: '职称类别用不上吧',
           value: 'title',
           show: true,
           type: 'text'

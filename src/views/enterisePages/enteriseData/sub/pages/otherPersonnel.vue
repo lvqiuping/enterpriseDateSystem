@@ -18,12 +18,12 @@
 import Pagination from '@/components/BasicTable/Pagination.vue'
 import BasicTable from '@/components/BasicTable/index.vue'
 import { getList } from '@/utils'
-import { GetPageCmpPersonsByType } from '@/api/enterise.js'
+import { GetPageCmpPerOthers } from '@/api/enterise.js'
 export default {
   name: 'Qualifications',
   components: { BasicTable, Pagination },
   props: {
-    perType: { type: Number, default: 0 }
+    cerType: { type: Number, default: 0 }
   },
   data() {
     return {
@@ -34,7 +34,7 @@ export default {
         pageIndex: 1,
         pageSize: 15,
         companyName: '',
-        perType: this.perType // 初始值
+        cerType: this.cerType // 初始值
       },
       tableTitle: [
         {
@@ -62,26 +62,26 @@ export default {
           type: 'text'
         },
         {
-          label: '安全管理资格类别',
-          value: 'xh',
+          label: '专业工种',
+          value: 'cerMajor',
           show: true,
           type: 'text'
         },
         {
-          label: '资格有效期',
-          value: 'ValidYears',
+          label: '发证单位',
+          value: 'cerAwardUnit',
           show: true,
           type: 'text'
         },
         {
-          label: '发证机关',
-          value: 'AwardUnit',
+          label: '发证日期',
+          value: 'cerAwardDate',
           show: true,
           type: 'text'
         },
         {
-          label: '查看',
-          value: 'xh',
+          label: '截止日期',
+          value: 'cerValidYears',
           show: true,
           type: 'text'
         }
@@ -89,25 +89,22 @@ export default {
     }
   },
   watch: {
-    'perType': {
+    'cerType': {
       immediate: true,
       handler(newVal, oldValue) {
-        console.log('perType?????', newVal)
-        this.listQuery.perType = newVal
+        this.listQuery.cerType = newVal
         this.getPageList(this.listQuery)
       }
     }
   },
   created() {
-    console.log('perType', this.perType)
-    console.log(this.$route.query.companyName.trim())
     this.listQuery.companyName = this.$route.query.companyName.trim()
     this.getPageList()
   },
   methods: {
     // 获取表格数据
     getPageList() {
-      getList(this, GetPageCmpPersonsByType, this.listQuery)
+      getList(this, GetPageCmpPerOthers, this.listQuery)
     }
   }
 }

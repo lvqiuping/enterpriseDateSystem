@@ -89,7 +89,9 @@ export default {
           axisLabel: { // x轴文字
             textStyle: {
               color: '#333333'
-            }
+            },
+            interval: 0,
+            rotate: 40 // 文字倾斜
           },
           axisLine: { // x轴线
             show: false,
