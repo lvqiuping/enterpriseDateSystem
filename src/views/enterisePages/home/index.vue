@@ -41,7 +41,7 @@
         <div slot="header" class="clearfix">
           <span class="font-semibold">人员资质</span>
           <div style="float: right;">
-            <el-select v-model="typeValue" :placeholder="options[0].label" @change="getType($event)">
+            <el-select v-model="typeValue" :placeholder="options[0].label" v-loading="loading" @change="getType($event)">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -101,6 +101,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       seeNumberCopy: '',
       seeNumberCopy1: '',
       seeNumberCopy2: '',
@@ -192,20 +193,25 @@ export default {
       })
     },
     getPieData() {
+      this.loading = true
       // this.typeValue // 因为返回字段是count,但是框架的字段是value,所以要转一下
       GetRegGroupMajorCounts({ cerType: this.typeValue }).then(response => {
-        this.pieChartData1 = response.data
-        this.pieChartData1.forEach((item) => {
-          this.pieChartData.push({ name: item.name, value: item.count })
+        console.log('response', response)
+     if(response.statusCode === 200){
+      this.loading = false
+      this.pieChartData1 = response.data
+      this.pieChartData1.forEach((item) => {
+      this.pieChartData.push({ name: item.name, value: item.count })
         })
+     }
       })
     },
     getProjectData() {
       GetProjectTypeCounts().then(response => {
         this.barChartData1 = response.data
         this.barChartData1.forEach((item) => {
-          this.barChartData.actualData.push(item.name)
-          this.barChartData.expectedData.push(item.count)
+        this.barChartData.actualData.push(item.name)
+        this.barChartData.expectedData.push(item.count)
         })
         console.log('this.barChartData', this.barChartData)
       })
@@ -221,11 +227,16 @@ export default {
       }
     },
     getOther() {
+      this.loading = true
       GetOtherCerTypeCounts().then(response => {
-        this.pieChartData2 = response.data
-        this.pieChartData2.forEach((item) => {
+        if(response.statusCode === 200){
+          this.loading = false
+          this.pieChartData2 = response.data
+          this.pieChartData2.forEach((item) => {
           this.pieChartData.push({ name: item.name, value: item.count })
         })
+        }
+     
       })
     },
     getSee(v) {

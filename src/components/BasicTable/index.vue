@@ -11,6 +11,7 @@
         <search-form
           :search-form="searchForm"
           :is-show="isShow"
+          :options="options"
           @searchFormEmit="searchFormEmit"
         />
       </div>
@@ -44,7 +45,7 @@
             <slot :name="item.slot" :row="scope.row" :column="item.prop" :index="scope.$index" />
           </div>
           <div v-else-if="item.type == 'router'">
-            <router-link :to="{path: item.path, query: {companyName: scope.row[item.value]} }" class="text-blue-400">{{ scope.row[item.value] }}</router-link>
+            <router-link :to="{path: item.path, query: {companyName: scope.row[item.value], personId: scope.row[item.id]} }" class="text-blue-400">{{ scope.row[item.value] }}</router-link>
           </div>
           <div v-else-if="item.type == 'options'">
             <el-button
@@ -83,7 +84,8 @@ export default {
     isShow: { type: Boolean, default: true },
     isSearch: { type: Boolean, default: true },
     buttonGroup: { type: Object, default: null },
-    isOperationBtn: { type: Boolean, default: false }
+    isOperationBtn: { type: Boolean, default: false },
+    options: { type: Array, default: null }
   },
   data() {
     return {

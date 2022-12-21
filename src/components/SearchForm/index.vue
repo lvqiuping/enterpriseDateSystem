@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form v-show="searchForm.show" ref="searchForm" :model="temp" label-position="" label-width="" class="flex mt-6 mx-6">
+    <el-form v-show="searchForm.show" ref="searchForm" :model="temp" label-position="" label-width="" class="flex flex-wrap mt-6 mx-6">
       <template>
         <div v-for="(field, index) in searchForm.fields" :key="index">
           <el-form-item v-if="field.type === 'input'" :label="field.label" class="flex mr-4">
@@ -15,6 +15,17 @@
             <el-radio-group v-model="temp[field.name]" @change="getRadioForm">
               <el-radio-button :label="field.value" plain>{{ field.label }}</el-radio-button>
             </el-radio-group>
+          </el-form-item>
+          <el-form-item v-if="field.type === 'select'" clearable class="flex mr-4">
+            <span class="mr-4">{{ field.label }}</span>
+            <el-select v-model="temp[field.name]" placeholder="请选择">
+              <el-option
+                v-for="item in options"
+                :key="item.id"
+                :label="item.majorName"
+                :value="item.id"
+              />
+            </el-select>
           </el-form-item>
         </div>
       </template>
@@ -31,67 +42,12 @@ export default {
   name: 'SearchForm',
   props: {
     searchForm: { type: Object, default: null },
-    isShow: { type: Boolean, default: true }
+    isShow: { type: Boolean, default: true },
+    options: { type: Array, default: null }
   },
   data() {
     return {
       temp: {
-      },
-      pickerOptions: {
-        shortcuts: [
-          {
-            text: '全部',
-            onClick(picker) {
-              const end = ''
-              const start = ''
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '3天内',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 3)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '一周内',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-              picker.$emit('pick', [start, end])
-            }
-          }, {
-            text: '三个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '半年内',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 180)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '一年内',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 365)
-              picker.$emit('pick', [start, end])
-            }
-          }
-        ]
       }
     }
   },
@@ -121,7 +77,8 @@ export default {
         address: '',
         projectType: '',
         name: '',
-        mobile: ''
+        mobile: '',
+        majorId: null
       }
       this.searching(this.temp)
     }

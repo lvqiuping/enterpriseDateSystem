@@ -5,6 +5,7 @@
       :table-data="tableData"
       :loading="loading"
       :search-form="searchForm"
+      :options="optionsMajorId"
       @refresh="getPageList()"
       @searchFormEmit2="searchFormEmit2"
     />
@@ -14,13 +15,14 @@
 <script>
 import Pagination from '@/components/BasicTable/Pagination.vue'
 import BasicTable from '@/components/BasicTable/index.vue'
-import { GetPageList } from '@/api/enterise.js'
+import { GetPagePersons, GetTopLevelMajors } from '@/api/staff.js'
 import { getList } from '@/utils'
 export default {
   name: 'EnteriseData',
   components: { BasicTable, Pagination },
   data() {
     return {
+      optionsMajorId: [],
       loading: false,
       searchForm: {
         show: true,
@@ -29,19 +31,34 @@ export default {
         size: 'default',
         fields: [
           {
-            type: 'input',
-            label: '信用代码',
-            name: 'companyNumber'
+            type: 'select',
+            label: '人员类别',
+            name: 'majorId'
           },
           {
             type: 'input',
-            label: '企业名称',
-            name: 'companyName'
+            label: '姓名',
+            name: 'name'
           },
           {
             type: 'input',
-            label: '法定代表人',
-            name: 'legalPerson'
+            label: '身份证号',
+            name: 'idCardNumber'
+          },
+          // {
+          //   type: 'input',
+          //   label: '电子证号',
+          //   name: 'cerNumber'
+          // },
+          // {
+          //   type: 'input',
+          //   label: '注册单位',
+          //   name: 'cerAwardUnit'
+          // },
+          {
+            type: 'input',
+            label: '注册号',
+            name: 'cerRegNumber'
           }
         ]
       },
@@ -54,26 +71,27 @@ export default {
         },
         {
           label: '姓名',
-          value: 'xh',
-          show: true,
-          type: 'text'
-        },
-        {
-          label: '身份证号',
-          value: 'comName',
+          value: 'perName',
+          id: 'id', // 好神奇
           show: true,
           type: 'router',
           path: 'sInfos'
         },
         {
+          label: '身份证号',
+          value: 'perIdNumber',
+          show: true,
+          type: 'text'
+        },
+        {
           label: '注册类别',
-          value: 'xh',
+          value: 'regMajorName',
           show: true,
           type: 'text'
         },
         {
           label: '注册号（执业印章号）',
-          value: 'xh',
+          value: 'cerNumber',
           show: true,
           type: 'text'
         }
@@ -87,13 +105,20 @@ export default {
     }
   },
   created() {
-    this.getPageList()
+    this.get()
+    // this.getPageList()
   },
   methods: {
+    get() {
+      GetTopLevelMajors().then((response) => {
+        console.log('88', response)
+        this.optionsMajorId = response.data
+      })
+    },
     // 获取表格数据
     getPageList() {
       this.loading = true
-      getList(this, GetPageList, this.listQuery)
+      getList(this, GetPagePersons, this.listQuery)
     },
     searchFormEmit2(v) {
       this.listQuery.pageIndex = 1

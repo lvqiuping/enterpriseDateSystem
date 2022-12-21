@@ -4,51 +4,23 @@ import request from '@/utils/request'
  * @param {*} query
  * @returns
  */
-export function GetPageList(query) {
+export function GetPagePersons(query) {
   return request({
-    url: '/api/Company/GetPageList',
+    url: '/api/Person/GetPagePersons',
     method: 'get',
     params: query
   })
 }
-export function Get(query) {
+export function GetTopLevelMajors(query) {
   return request({
-    url: '/api/Company/Get',
+    url: '/api/Person/GetTopLevelMajors',
     method: 'get',
     params: query
   })
 }
-export function GetPageCmpZiZhis(query) {
+export function GetPerDetailInfo(query) {
   return request({
-    url: '/api/Company/GetPageCmpZiZhis',
-    method: 'get',
-    params: query
-  })
-}
-export function GetPageCompanyProjects(query) {
-  return request({
-    url: '/api/Company/GetPageCompanyProjects',
-    method: 'get',
-    params: query
-  })
-}
-export function GetPageCompanyContacts(query) {
-  return request({
-    url: '/api/Company/GetPageCompanyContacts',
-    method: 'get',
-    params: query
-  })
-}
-export function GetPageCmpPerTitles(query) {
-  return request({
-    url: '/api/Company/GetPageCmpPerTitles',
-    method: 'get',
-    params: query
-  })
-}
-export function GetPageCmpPersonsByType(query) {
-  return request({
-    url: '/api/Company/GetPageCmpPersonsByType',
+    url: '/api/Person/GetPerDetailInfo',
     method: 'get',
     params: query
   })

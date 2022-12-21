@@ -13,13 +13,13 @@
 <script>
 import InfosTable from '@/views/enterisePages/staff/sub/pages/infosTable.vue'
 import SubNavTabs from '@/views/enterisePages/staff/components/subNavTabs.vue'
-import { Get } from '@/api/enterise.js'
+import { GetPerDetailInfo } from '@/api/staff.js'
 export default {
   name: 'EInfos',
   components: { InfosTable, SubNavTabs },
   data() {
     return {
-      companyName: this.$route.query.companyName.trim(),
+      personId: this.$route.query.personId,
       tabsList: [
         { index: 0, label: '执业注册信息', name: 'registration', url: require('@/assets/staff/s2.png'), fit: 'contain' },
         { index: 1, label: '个人工程业绩', name: 'performance', url: require('@/assets/staff/s1.png'), fit: 'contain' }
@@ -52,7 +52,8 @@ export default {
     // 公司信息
     infos() {
       this.loading = true
-      Get({ companyName: this.$route.query.companyName.trim() }).then(response => {
+      GetPerDetailInfo({ personId: this.personId }).then(response => {
+        console.log('6666', response)
         this.companyInfos = response.data
       })
     },
