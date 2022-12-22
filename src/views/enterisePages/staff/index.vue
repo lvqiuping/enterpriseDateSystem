@@ -45,20 +45,20 @@ export default {
             label: '身份证号',
             name: 'idCardNumber'
           },
-          // {
-          //   type: 'input',
-          //   label: '电子证号',
-          //   name: 'cerNumber'
-          // },
-          // {
-          //   type: 'input',
-          //   label: '注册单位',
-          //   name: 'cerAwardUnit'
-          // },
           {
             type: 'input',
             label: '注册号',
             name: 'cerRegNumber'
+          },
+          {
+            type: 'input',
+            label: '注册单位',
+            name: 'cerAwardUnit'
+          },
+          {
+            type: 'input',
+            label: '电子证号',
+            name: 'cerNumber'
           }
         ]
       },
@@ -91,7 +91,7 @@ export default {
         },
         {
           label: '注册号（执业印章号）',
-          value: 'cerNumber',
+          value: 'cerRegNumber',
           show: true,
           type: 'text'
         }
@@ -106,12 +106,11 @@ export default {
   },
   created() {
     this.get()
-    // this.getPageList()
+    this.getPageList()
   },
   methods: {
     get() {
       GetTopLevelMajors().then((response) => {
-        console.log('88', response)
         this.optionsMajorId = response.data
       })
     },

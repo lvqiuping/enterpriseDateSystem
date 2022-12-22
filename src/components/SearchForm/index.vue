@@ -78,7 +78,11 @@ export default {
         projectType: '',
         name: '',
         mobile: '',
-        majorId: null
+        majorId: null,
+        idCardNumber: '',
+        cerNumber: '',
+        cerAwardUnit: '',
+        cerRegNumber: ''
       }
       this.searching(this.temp)
     }

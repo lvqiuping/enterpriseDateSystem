@@ -5,10 +5,10 @@
       :active-name="activeNames"
       @getActiveSubName="getActiveSubName"
     />
-    <div v-if="activeNames == 'registration'">
+    <div v-if="activeNames == '执业注册信息'">
       <registration />
     </div>
-    <div v-else-if="activeNames == 'performance'">
+    <div v-else-if="activeNames == '个人工程业绩'">
       <performance />
     </div>
   </div>
@@ -33,14 +33,13 @@ export default {
     'activeName': {
       immediate: true,
       handler(newVal, oldValue) {
-        console.log('newVal', newVal)
         this.activeNames = newVal
       }
     }
   },
   methods: {
     getActiveSubName(v) {
-      this.activeNames = v // 不能直接改变props的值
+      this.activeNames = v.label // 不能直接改变props的值
     }
   }
 }

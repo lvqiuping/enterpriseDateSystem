@@ -3,27 +3,6 @@
     <div class="">
       <basic-infos :company-infos="companyInfos" :infos-list="InfosList" />
     </div>
-    <!-- <div class="text-xl font-semibold p-6">注册监理工程师</div>
-    <div class="grid grid-rows-3 grid-cols-6  text-center">
-      <div style="background-color: #f8f8f8" class="border-b border-r flex justify-center items-center font-semibold ">注册单位</div>
-      <div class="border-b flex justify-center items-center border-r">{{ companyInfos.comCapital }}</div>
-      <div style="background-color: #f8f8f8" class="border-b border-r flex justify-center items-center font-semibold">证书编号</div>
-      <div class="border-b flex justify-center items-center border-r ">1</div>
-      <div style="background-color: #f8f8f8" class="border-b border-r flex justify-center items-center font-semibold">注册编号</div>
-      <div class="border-b flex justify-center items-center border-r ">1</div>
-      <div style="background-color: #f8f8f8" class="border-b border-r flex justify-center items-center font-semibold">注册专业</div>
-      <div class="border-b flex justify-center items-center border-r">1</div>
-      <div style="background-color: #f8f8f8" class="border-b border-r flex justify-center items-center font-semibold"> 有效期</div>
-      <div class="border-b flex justify-center items-center col-span-3 border-r">1</div>
-      <div style="background-color: #f8f8f8" class="border-b border-r flex justify-center items-center font-semibold">注册专业</div>
-      <div class="border-b flex justify-center items-center border-r ">1</div>
-      <div style="background-color: #f8f8f8" class="border-b border-r flex justify-center items-center font-semibold">有效期</div>
-      <div class="border-b flex justify-center items-center border-r col-span-3 ">1</div>
-    </div>
-    <div class="grid grid-cols-6 text-center">
-      <div style="background-color: #f8f8f8" class="border-b border-r flex justify-center items-center font-semibold">职称</div>
-      <div class="border-b border-r flex flex-wrap justify-center items-center col-span-5 p-4 text-left">1</div>
-    </div> -->
     <div v-if="isShow" class="foot my-10">
       <div class="flex justify-center">
         <el-timeline>
@@ -56,7 +35,7 @@ export default {
   components: { BasicInfos },
   data() {
     return {
-      isShow: true,
+      isShow: false,
       activities: [{
         content: '2010-03-14 - 初始注册 - 电力工程吉林市电力建设监理有限公司电力工程吉林市电力建设监理有限公司电力工程吉林市电力建设监理有限公司电力工程吉林市电力建设监理有限公司',
         timestamp: '2010-03-14 20:46',

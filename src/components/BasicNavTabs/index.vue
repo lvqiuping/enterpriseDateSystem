@@ -9,7 +9,7 @@
               :src="item.url"
               :fit="item.fit"
               class="mr-4"
-            /> {{ item.count }}</span>
+            />{{ item.name }}</span>
         </el-tab-pane>
       </el-tabs>
     </div>
