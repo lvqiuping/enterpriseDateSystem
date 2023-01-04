@@ -1,7 +1,8 @@
 <template>
-  <div class="border">
-    <div class="">
-      <basic-infos :company-infos="companyInfos" :infos-list="InfosList" />
+  <div class="">
+    <div v-for="(item, index) in companyInfosList" :key="index" class="border my-6">
+      <div class="pt-6 text-xl font-semibold" style="margin-left: 50px"> {{ item.cerName }}</div>
+      <basic-infos :company-infos="item" :infos-list="InfosList" :cols-two="false" />
     </div>
     <div v-if="isShow" class="foot my-10">
       <div class="flex justify-center">
@@ -22,20 +23,21 @@
       </div>
       <div class="text-center text-gray-300 mt-4">查看证书变更记录（6）</div>
     </div>
-    <div v-else class="foot my-10">
+    <!-- <div v-else class="foot my-10">
       <div class="text-center text-gray-300">暂无证书变更记录</div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
 import BasicInfos from '@/components/BasicInfos/index.vue'
-import { Get } from '@/api/enterise.js'
+import { GetPerRegCertificates } from '@/api/staff.js'
 export default {
   name: 'Registration',
   components: { BasicInfos },
+  props: { personId: { type: String, default: '' }},
   data() {
     return {
-      isShow: false,
+      isShow: false, // 暂时不要
       activities: [{
         content: '2010-03-14 - 初始注册 - 电力工程吉林市电力建设监理有限公司电力工程吉林市电力建设监理有限公司电力工程吉林市电力建设监理有限公司电力工程吉林市电力建设监理有限公司',
         timestamp: '2010-03-14 20:46',
@@ -61,16 +63,15 @@ export default {
         type: 'primary',
         icon: 'el-icon-remove'
       }],
-      companyInfos: {},
+      companyInfosList: [],
+      // companyInfos: {},
       InfosList: {
-        comCapital: '注册单位',
-        comLegalPerson: '证书编号',
-        comNumber: '注册编号',
-        comRegisterOffice: '职称',
-        comStatus: '注册专业',
-        comStartDate: '有效期',
-        comOrganizeNumber: '注册专业',
-        comType: '有效期'
+        cerAwardUnit: '注册单位',
+        cerNumber: '证书编号',
+        cerRegNumber: '注册编号',
+        cerName: '职称',
+        cerMajor: '注册专业',
+        cerEnOn: '有效期'
       }
     }
   },
@@ -81,8 +82,8 @@ export default {
     // 公司信息
     infos() {
       this.loading = true
-      Get({ companyName: this.$route.query.companyName.trim() }).then(response => {
-        this.companyInfos = response.data
+      GetPerRegCertificates({ personId: this.personId }).then(response => {
+        this.companyInfosList = response.data
       })
     }
   }

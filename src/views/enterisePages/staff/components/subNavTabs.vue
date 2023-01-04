@@ -6,10 +6,10 @@
       @getActiveSubName="getActiveSubName"
     />
     <div v-if="activeNames == '执业注册信息'">
-      <registration />
+      <registration :person-id="personId" />
     </div>
     <div v-else-if="activeNames == '个人工程业绩'">
-      <performance />
+      <performance :person-id="personId" />
     </div>
   </div>
 </template>
@@ -22,7 +22,8 @@ export default {
   components: { BasicNavTabs, Registration, Performance },
   props: {
     tabsList: { type: Array, default: null },
-    activeName: { type: String, default: '' }
+    activeName: { type: String, default: '' },
+    personId: { type: String, default: '' }
   },
   data() {
     return {

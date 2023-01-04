@@ -25,3 +25,17 @@ export function GetPerDetailInfo(query) {
     params: query
   })
 }
+export function GetPerRegCertificates(query) {
+  return request({
+    url: '/api/Person/GetPerRegCertificates',
+    method: 'get',
+    params: query
+  })
+}
+export function GetPerProjects(query) {
+  return request({
+    url: '/api/Person/GetPerProjects',
+    method: 'get',
+    params: query
+  })
+}

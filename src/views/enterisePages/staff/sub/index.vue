@@ -5,7 +5,7 @@
         <infos-table :company-infos="companyInfos" />
       </div>
       <div class="subnavbox my-8">
-        <sub-nav-tabs :tabs-list="tabsList" :active-name="activeName" />
+        <sub-nav-tabs :tabs-list="tabsList" :active-name="activeName" :person-id="personId" />
       </div>
     </div>
   </div>

@@ -66,6 +66,7 @@ export default {
       this.searching(this.temp)
     },
     searching(v) {
+      console.log('this.temp', this.temp)
       this.$emit('searchFormEmit', v || this.temp)
     },
     resetTemp() {
