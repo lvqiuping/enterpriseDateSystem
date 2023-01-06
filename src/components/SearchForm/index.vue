@@ -7,7 +7,7 @@
             <el-input
               v-model.trim="temp[field.name]"
               clearable
-              :placeholder="field.label"
+              :placeholder="field.placeholder? field.placeholder : field.label"
               @keyup.enter.native="searching()"
             />
           </el-form-item>

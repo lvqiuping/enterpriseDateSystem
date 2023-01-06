@@ -5,44 +5,22 @@
       :style="{ minHeight: '150px', backgroundImage: `url(${topImg})` }"
     >
       <div class="container mx-auto h-full">
-        <div class="h-full flex justify-between">
+        <div class="h-full flex justify-between items-center">
           <div class="justify-self-center">
             <el-image style="width: 300px; height: 150px" :src="require('@/assets/layout/logo.png')" fit="contain" />
           </div>
-          <div class="justify-self-center self-center">
-            <el-input
-              v-model="keyword"
-              placeholder="请输入关键词"
-              class="input-with-select"
-              size="large"
-              clearable
-              style="background-color: #0082ff"
-            >
-              <template #prepend>
-                <el-select
-                  v-model="select"
-                  placeholder="请选择"
-                  style="width: 115px"
-                  size="large"
-                  filterable
-                  default-first-option
-                >
-                  <el-option
-                    v-for="(item, index) in searchItems"
-                    :key="index"
-                    :label="item.title"
-                    :value="item.value"
+          <div>
+            <el-tabs type="border-card">
+              <el-tab-pane v-for="(item, index) in searchItems" :key="index" :label="item.title">
+                <div style="display: flex" class="searchBox">
+                  <search-form
+                    :search-form="searchForm"
+                    :is-show="true"
+                    @searchFormEmit="searchFormEmit"
                   />
-                </el-select>
-              </template>
-              <template #append>
-                <el-button>
-                  <el-icon>
-                    <Search />
-                  </el-icon>
-                </el-button>
-              </template>
-            </el-input>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
           </div>
         </div>
       </div>
@@ -111,10 +89,11 @@ import variables from '@/styles/variables.scss'
 import PasswordForm from '@/views/enterisePages/userManagement/components/passwordForm.vue'
 import { UpdatePassword } from '@/api/user.js'
 import { TipsBox } from '@/utils/feedback.js'
+import SearchForm from '@/components/SearchForm/index.vue'
 
 export default {
   name: 'AppHeader',
-  components: { SidebarItem, PasswordForm },
+  components: { SidebarItem, PasswordForm, SearchForm },
   data() {
     return {
       dialogPasswordVisible: false,
@@ -139,7 +118,21 @@ export default {
           title: '项目数据',
           value: 3
         }
-      ]
+      ],
+      searchForm: {
+        show: true,
+        expend: true,
+        title: '表格筛选',
+        size: 'default',
+        fields: [
+          {
+            type: 'input',
+            label: '',
+            placeholder: '请输入关键词，例如企业名称、统一社会信用代码',
+            name: 'keywords'
+          }
+        ]
+      }
     }
   },
   computed: {
@@ -172,6 +165,9 @@ export default {
     }
   },
   methods: {
+    searchFormEmit(v) {
+      console.log('v', v)
+    },
     changePassword() {
       this.resetTemp()
       this.passwordtemp.userId = this.userId
@@ -206,5 +202,20 @@ export default {
 <style scoped>
 ::v-deep .el-menu.el-menu--horizontal{
   border-bottom: 0
+}
+::v-deep .el-tabs__content{
+  padding: 0
+}
+::v-deep .searchBox .el-form{
+  margin: 0!important;
+}
+::v-deep .searchBox .el-form-item {
+  margin: 0!important;
+}
+::v-deep .el-input--suffix .el-input__inner{
+  width: 360px;
+}
+.searchBox{
+  margin: 10px;
 }
 </style>

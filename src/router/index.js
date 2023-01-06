@@ -167,6 +167,20 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/search',
+    component: Layout,
+    redirect: '/search',
+    hidden: true,
+    children: [
+      {
+        path: '/search',
+        name: 'search',
+        component: () => import('@/views/enterisePages/search/index'),
+        meta: { title: '搜索列表' }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!! 这里本来到404页面，现在到首页
   { path: '*', redirect: '/', hidden: true }
 ]

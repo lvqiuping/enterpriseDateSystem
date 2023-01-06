@@ -74,3 +74,10 @@ export function GetPageCmpRegMajors(query) {
     params: query
   })
 }
+export function GetCmpByDimQuery(query) {
+  return request({
+    url: '/api/Company/GetCmpByDimQuery',
+    method: 'get',
+    params: query
+  })
+}
