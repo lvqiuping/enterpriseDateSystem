@@ -35,6 +35,11 @@ export default {
           },
           {
             type: 'input',
+            label: '项目编号',
+            name: 'projectCode'
+          },
+          {
+            type: 'input',
             label: '项目类别',
             name: 'projectType'
           },
@@ -60,6 +65,7 @@ export default {
         {
           label: '项目名称',
           value: 'projectName',
+          projectCode: 'projectCode',
           show: true,
           type: 'router',
           path: 'pInfos'

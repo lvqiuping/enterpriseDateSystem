@@ -4,6 +4,14 @@ import request from '@/utils/request'
  * @param {*} query
  * @returns
  */
+
+export function GetPersonsByDimQuery(query) {
+  return request({
+    url: '/api/Person/GetPersonsByDimQuery',
+    method: 'get',
+    params: query
+  })
+}
 export function GetPagePersons(query) {
   return request({
     url: '/api/Person/GetPagePersons',

@@ -5,23 +5,18 @@
       :table-data="tableData"
       :loading="loading"
       :is-search="false"
-      @refresh="getPageList()"
-    >
-      <template v-slot:check="scope">
-        <el-button type="text">查看</el-button>
-      </template>
-    </basic-table>
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageIndex" :limit.sync="listQuery.pageSize" @pagination="getPageList()" />
+    />
   </div>
 </template>
 <script>
 import BasicTable from '@/components/BasicTable/index.vue'
-import Pagination from '@/components/BasicTable/Pagination.vue'
-import { GetPageList } from '@/api/enterise.js'
-import { getList } from '@/utils'
+import { GetProjectSingleInfos } from '@/api/project.js'
 export default {
   name: 'MonomerInformation',
-  components: { BasicTable, Pagination },
+  components: { BasicTable },
+  props: {
+    projectCode: { type: String, default: '' }
+  },
   data() {
     return {
       loading: false,
@@ -34,54 +29,43 @@ export default {
         },
         {
           label: '单体建（构）筑物名称',
-          value: 'comName',
+          value: 'subprjname',
           show: true,
-          type: 'router',
-          path: 'pInfos'
+          type: 'text'
         },
         {
           label: '工程总造价（万元）',
-          value: 'xh',
+          value: 'invest',
           show: true,
           type: 'text'
         },
         {
           label: '建筑面积（平方米）',
-          value: 'xh',
+          value: 'buildarea',
           show: true,
           type: 'text'
         },
         {
           label: '建筑高度（米）',
-          value: 'xh',
+          value: 'buildheight',
           show: true,
           type: 'text'
         },
         {
           label: '结构体系',
-          value: 'xh',
+          value: 'structuretypenum',
           show: true,
           type: 'text'
         },
         {
           label: '工程等级',
-          value: 'xh',
+          value: 'prjlevelnum',
           show: true,
           type: 'text'
-        },
-        {
-          label: '详情',
-          value: 'xh',
-          show: true,
-          type: 'slot',
-          slot: 'check'
         }
       ],
       tableData: null,
-      total: 0,
       listQuery: {
-        pageIndex: 1,
-        pageSize: 15
       }
     }
   },
@@ -92,7 +76,11 @@ export default {
     // 获取表格数据
     getPageList() {
       this.loading = true
-      getList(this, GetPageList, this.listQuery)
+      this.listQuery.projectCode = this.projectCode
+      GetProjectSingleInfos(this.listQuery).then(response => {
+        this.loading = false
+        this.tableData = response.data
+      })
     }
   }
 }

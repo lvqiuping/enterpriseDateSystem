@@ -45,7 +45,7 @@
             <slot :name="item.slot" :row="scope.row" :column="item.prop" :index="scope.$index" />
           </div>
           <div v-else-if="item.type == 'router'">
-            <router-link :to="{path: item.path, query: {companyName: scope.row[item.value], personId: scope.row[item.id]} }" class="text-blue-400">{{ scope.row[item.value] }}</router-link>
+            <router-link :to="{path: item.path, query: {companyName: scope.row[item.value], personId: scope.row[item.id], projectCode: scope.row[item.projectCode]} }" class="text-blue-400">{{ scope.row[item.value] }}</router-link>
           </div>
           <div v-else-if="item.type == 'options'">
             <el-button

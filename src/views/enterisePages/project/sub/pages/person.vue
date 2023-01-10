@@ -5,19 +5,18 @@
       :table-data="tableData"
       :loading="loading"
       :is-search="false"
-      @refresh="getPageList()"
     />
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageIndex" :limit.sync="listQuery.pageSize" @pagination="getPageList()" />
   </div>
 </template>
 <script>
 import BasicTable from '@/components/BasicTable/index.vue'
-import Pagination from '@/components/BasicTable/Pagination.vue'
-import { GetPageList } from '@/api/enterise.js'
-import { getList } from '@/utils'
+import { GetProjectJoinUnits } from '@/api/project.js'
 export default {
   name: 'Person',
-  components: { BasicTable, Pagination },
+  components: { BasicTable },
+  props: {
+    projectCode: { type: String, default: '' }
+  },
   data() {
     return {
       loading: false,
@@ -30,42 +29,37 @@ export default {
         },
         {
           label: '企业承担角色',
-          value: 'comName',
+          value: 'corprolenum',
           show: true,
-          type: 'router',
-          path: 'pInfos'
+          type: 'text'
         },
         {
           label: '企业名称',
-          value: 'xh',
+          value: 'corpname',
           show: true,
           type: 'text'
         },
         {
           label: '企业统一社会信用代码',
-          value: 'xh',
+          value: 'corpcode',
           show: true,
           type: 'text'
         },
         {
           label: '负责人姓名',
-          value: 'xh',
+          value: 'personname',
           show: true,
           type: 'text'
         },
         {
           label: '负责人证件号',
-          value: 'xh',
+          value: 'personidcard',
           show: true,
           type: 'text'
         }
       ],
-      tableData: null,
-      total: 0,
-      listQuery: {
-        pageIndex: 1,
-        pageSize: 15
-      }
+      listQuery: {},
+      tableData: null
     }
   },
   created() {
@@ -75,7 +69,11 @@ export default {
     // 获取表格数据
     getPageList() {
       this.loading = true
-      getList(this, GetPageList, this.listQuery)
+      this.listQuery.projectCode = this.projectCode
+      GetProjectJoinUnits(this.listQuery).then(response => {
+        this.loading = false
+        this.tableData = response.data
+      })
     }
   }
 }

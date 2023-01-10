@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="border p-6">
-        <basic-infos :company-infos="companyInfos" :infos-list="InfosList" :special-col="true" />
+        <basic-infos :company-infos="companyInfos" :infos-list="InfosList" :special-col="true" :companyname="true" />
         <div class="border">
           <div class="flex justify-around my-8">
             <div class="flex justify-start">

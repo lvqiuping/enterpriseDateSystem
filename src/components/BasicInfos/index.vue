@@ -1,9 +1,13 @@
 <template>
   <div>
-    <div v-if="showCompanyName" class="flex justify-between pb-6">
+    <div v-if="companyname" class="flex justify-between pb-6">
       <div class="text-xl font-semibold">{{ companyInfos.comName }}</div>
-      <div></div>
+      <div>{{ companyInfos.comProvince }}</div>
     </div>
+    <!-- <div v-if="prjname" class="flex justify-between pb-6">
+      <div class="text-xl font-semibold">{{ companyInfos.prjname }}</div>
+      <div>{{ companyInfos.province }}</div>
+    </div> -->
     <div class="grid grid-cols-2 text-center">
       <div v-for="(item, index) in InfosList" :key="index" :class="colsTwo? 'grid grid-cols-2 text-center': 'grid grid-cols-3 text-center'">
         <div style="background-color: #f8f8f8" class="border flex justify-center items-center font-semibold p-2">{{ item }}</div>
@@ -25,7 +29,8 @@ export default {
     companyInfos: { type: Object, default: Object },
     // eslint-disable-next-line vue/prop-name-casing
     InfosList: { type: Object, default: Object },
-    showCompanyName: { type: Boolean, default: true },
+    companyname: { type: Boolean, default: false },
+    prjname: { type: Boolean, default: false },
     colsTwo: { type: Boolean, default: true },
     specialCol: { type: Boolean, default: false }
   }

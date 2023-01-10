@@ -6,7 +6,7 @@
       @getActiveSubName="getActiveSubName"
     />
 
-    <div v-if="activeName == 'basicInformation'">
+    <div v-if="activeName == '工程基本信息'">
       <basic-nav-tabs
         :tabs-list="subTabsList"
         :is-second-nav="true"
@@ -15,13 +15,13 @@
       />
 
       <div>
-        <sub-sub-nav-tabs :sub-active-name="subActiveName" />
+        <sub-sub-nav-tabs :sub-active-name="subActiveName" :project-code="projectCode" />
       </div>
     </div>
-    <div v-else-if="activeName == 'registrationInformation'">
+    <div v-else-if="activeName == '合同登记信息'">
       <registration-information />
     </div>
-    <div v-else-if="activeName == 'completionAcceptance'">
+    <div v-else-if="activeName == '竣工验收'">
       <basic-nav-tabs
         :tabs-list="completionAcceptanceTabsList"
         :is-second-nav="true"
@@ -44,21 +44,22 @@ export default {
   components: { BasicNavTabs, subSubNavTabs, RegistrationInformation },
   props: {
     tabsList: { type: Array, default: null },
-    activeName: { type: String, default: '' }
+    activeName: { type: String, default: '' },
+    projectCode: { type: String, default: '' }
   },
   data() {
     return {
       subTabsList: [
-        { index: 0, label: '详细信息', name: 'information' },
-        { index: 1, label: '参与单位及相关负责人', name: 'person' },
-        { index: 2, label: '单体信息', name: 'monomerInformation' }
+        { name: '详细信息' },
+        { name: '参与单位及相关负责人' },
+        { name: '单体信息' }
       ],
-      subActiveName: 'information',
+      subActiveName: '详细信息',
       completionAcceptanceTabsList: [
-        { index: 0, label: '竣工验收备案信息', name: 'filingInformation' },
-        { index: 1, label: '竣工验收信息', name: 'acceptanceInformation' }
+        { name: '竣工验收备案信息' },
+        { name: '竣工验收信息' }
       ],
-      completionAcceptanceActiveName: 'filingInformation'
+      completionAcceptanceActiveName: '竣工验收备案信息'
     }
   },
   watch: {
@@ -77,13 +78,6 @@ export default {
       }
     }
   },
-  created() {
-    // if (this.activeName === 'completionAcceptance') {
-    //   this.subActiveName = 'filingInformation'
-    // } else if (this.activeName === 'basicInformation') {
-    //   this.subActiveName = 'information'
-    // }
-  },
   methods: {
     getActiveSubName(v) {
       if (v === 'completionAcceptance') {
@@ -94,10 +88,10 @@ export default {
       this.$emit('getActiveSubNameEmit', v)
     },
     getSubActiveSubName(v) {
-      this.subActiveName = v
+      this.subActiveName = v.name
     },
     getCompletionAcceptanceActiveName(v) {
-      this.completionAcceptanceActiveName = v
+      this.completionAcceptanceActiveName = v.name
     }
   }
 }

@@ -1,11 +1,11 @@
 <template>
   <div>
     <div>
-      <div class="border">
-        <basic-infos :company-infos="companyInfos" :infos-list="InfosList" />
+      <div class="border p-6">
+        <basic-infos :company-infos="companyInfos" :infos-list="InfosList" :prjname="true" />
       </div>
       <div class="subnavbox my-8">
-        <sub-nav-tabs :tabs-list="tabsList" :active-name="activeName" @getActiveSubNameEmit="getActiveSubNameEmit" />
+        <sub-nav-tabs :tabs-list="tabsList" :active-name="activeName" :project-code="projectCode" @getActiveSubNameEmit="getActiveSubNameEmit" />
       </div>
     </div>
   </div>
@@ -13,48 +13,49 @@
 <script>
 import BasicInfos from '@/components/BasicInfos/index.vue'
 import SubNavTabs from '@/views/enterisePages/project/components/subNavTabs.vue'
-import { Get } from '@/api/enterise.js'
+import { GetProjectDetail } from '@/api/project.js'
 export default {
   name: 'ProjectSub',
   components: { BasicInfos, SubNavTabs },
   data() {
     return {
-      companyName: this.$route.query.companyName.trim(),
+      projectCode: '',
       tabsList: [
-        { index: 0, label: '工程基本信息', name: 'basicInformation' },
-        { index: 1, label: '合同登记信息', name: 'registrationInformation' },
-        { index: 2, label: '竣工验收', name: 'completionAcceptance' }
+        { name: '工程基本信息' },
+        { name: '合同登记信息' },
+        { name: '竣工验收' }
       ],
-      activeName: 'basicInformation',
+      activeName: '工程基本信息',
       companyInfos: {},
       InfosList: {
-        comCapital: '项目编号',
-        comLegalPerson: '省级项目编号',
-        comNumber: '建设单位',
-        comStatus: '建设单位统一社会信用代码',
-        comStartDate: '项目分类',
-        comOrganizeNumber: '建设性质',
-        comType: '总面积（平方米）',
-        comRegisterOffice: '总投资（万元）',
-        comIndustry: '立项级别',
-        a: '立项文号'
+        prjnum: '项目编号',
+        provinceprjnum: '省级项目编号',
+        buildcorpname: '建设单位',
+        buildcorpcode: '建设单位统一社会信用代码',
+        prjtypenum: '项目分类',
+        prjpropertynum: '建设性质',
+        allarea: '总面积（平方米）',
+        allinvest: '总投资（万元）',
+        prjapprovallevelnum: '立项级别',
+        prjapprovalnum: '立项文号'
       }
     }
   },
   created() {
+    this.projectCode = this.$route.query.projectCode
     this.infos()
   },
   methods: {
     // 公司信息
     infos() {
       this.loading = true
-      Get({ companyName: this.$route.query.companyName.trim() }).then(response => {
+      GetProjectDetail({ projectCode: this.projectCode }).then(response => {
         this.companyInfos = response.data
       })
     },
     // tabs
     getActiveSubNameEmit(v) {
-      this.activeName = v
+      this.activeName = v.name
     }
   }
 }

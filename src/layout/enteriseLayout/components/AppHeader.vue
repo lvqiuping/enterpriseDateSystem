@@ -10,11 +10,11 @@
             <el-image style="width: 300px; height: 150px" :src="require('@/assets/layout/logo.png')" fit="contain" />
           </div>
           <div>
-            <el-tabs type="border-card">
-              <el-tab-pane v-for="(item, index) in searchItems" :key="index" :label="item.title">
+            <el-tabs v-model="activeTabs" type="border-card" @tab-click="changeTabs">
+              <el-tab-pane v-for="(item, index) in searchItems" :key="index" :label="item.name">
                 <div style="display: flex" class="searchBox">
                   <search-form
-                    :search-form="searchForm"
+                    :search-form="dataType === 0 ? searchForm0 : dataType === 1 ? searchForm1 : searchForm2"
                     :is-show="true"
                     @searchFormEmit="searchFormEmit"
                   />
@@ -101,25 +101,21 @@ export default {
         newPassword: '',
         userId: ''
       },
-      keyword: '',
-      select: '',
       topImg: require('@/assets/layout/l2.png'),
-      activeIndex: 0,
+      activeTabs: '',
       searchItems: [
         {
-          title: '企业数据',
-          value: 1
+          name: '企业数据'
         },
         {
-          title: '人员数据',
-          value: 2
+          name: '人员数据'
         },
         {
-          title: '项目数据',
-          value: 3
+          name: '项目数据'
         }
       ],
-      searchForm: {
+      dataType: 0,
+      searchForm0: {
         show: true,
         expend: true,
         title: '表格筛选',
@@ -128,7 +124,35 @@ export default {
           {
             type: 'input',
             label: '',
-            placeholder: '请输入关键词，例如企业名称、统一社会信用代码',
+            placeholder: '请输入企业名称、统一社会信用代码',
+            name: 'keywords'
+          }
+        ]
+      },
+      searchForm1: {
+        show: true,
+        expend: true,
+        title: '表格筛选',
+        size: 'default',
+        fields: [
+          {
+            type: 'input',
+            label: '',
+            placeholder: '请输入姓名、身份证号、手机号',
+            name: 'keywords'
+          }
+        ]
+      },
+      searchForm2: {
+        show: true,
+        expend: true,
+        title: '表格筛选',
+        size: 'default',
+        fields: [
+          {
+            type: 'input',
+            label: '',
+            placeholder: '请输入项目名称、项目编码、承建公司',
             name: 'keywords'
           }
         ]
@@ -165,8 +189,28 @@ export default {
     }
   },
   methods: {
+    changeTabs(tab) {
+      console.log(tab.label)
+      if (tab.label === '企业数据') {
+        this.dataType = 0
+      } else if (tab.label === '人员数据') {
+        this.dataType = 1
+      } else if (tab.label === '项目数据') {
+        this.dataType = 2
+      }
+    },
     searchFormEmit(v) {
-      console.log('v', v)
+      if (v.keywords === undefined) {
+        TipsBox('warning', '请输入关键词')
+        return
+      }
+      var query = { keywords: v.keywords, dataType: this.dataType }
+      console.log(this.$route.path)
+      console.log('query2', query)
+      // return
+      if (this.$route.path !== '/search') {
+        this.$router.push({ name: 'search', query: query })
+      }
     },
     changePassword() {
       this.resetTemp()

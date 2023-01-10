@@ -4,6 +4,14 @@ import request from '@/utils/request'
  * @param {*} query
  * @returns
  */
+
+export function GetCmpByDimQuery(query) {
+  return request({
+    url: '/api/Company/GetCmpByDimQuery',
+    method: 'get',
+    params: query
+  })
+}
 export function GetPageList(query) {
   return request({
     url: '/api/Company/GetPageList',
@@ -74,10 +82,4 @@ export function GetPageCmpRegMajors(query) {
     params: query
   })
 }
-export function GetCmpByDimQuery(query) {
-  return request({
-    url: '/api/Company/GetCmpByDimQuery',
-    method: 'get',
-    params: query
-  })
-}
+
