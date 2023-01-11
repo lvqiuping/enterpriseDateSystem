@@ -19,7 +19,7 @@
       </div>
     </div>
     <div v-else-if="activeName == '合同登记信息'">
-      <registration-information />
+      <registration-information :project-code="projectCode" />
     </div>
     <div v-else-if="activeName == '竣工验收'">
       <basic-nav-tabs
@@ -29,7 +29,7 @@
         @getActiveSubName="getCompletionAcceptanceActiveName"
       />
       <div>
-        <sub-sub-nav-tabs :sub-active-name="completionAcceptanceActiveName" />
+        <sub-sub-nav-tabs :sub-active-name="completionAcceptanceActiveName" :project-code="projectCode" />
       </div>
     </div>
   </div>

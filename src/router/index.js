@@ -181,6 +181,20 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/searchCopy',
+    component: Layout,
+    redirect: '/searchCopy',
+    hidden: true,
+    children: [
+      {
+        path: '/searchCopy',
+        name: 'searchCopy',
+        component: () => import('@/views/enterisePages/searchCopy/index'),
+        meta: { title: '搜索列表' }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!! 这里本来到404页面，现在到首页
   { path: '*', redirect: '/', hidden: true }
 ]

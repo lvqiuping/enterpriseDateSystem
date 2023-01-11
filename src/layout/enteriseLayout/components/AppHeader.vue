@@ -209,7 +209,9 @@ export default {
       console.log('query2', query)
       // return
       if (this.$route.path !== '/search') {
-        this.$router.push({ name: 'search', query: query })
+        this.$router.replace({ name: 'search', query: query })
+      } else {
+        this.$router.replace({ name: 'searchCopy', query: query })
       }
     },
     changePassword() {

@@ -29,7 +29,7 @@
           </el-form-item>
         </div>
       </template>
-      <div v-show="isShow" class="flex ml-6">
+      <div v-show="isShow" class="flex mb-6">
         <el-button type="primary" size="mini" icon="" class="w-24 h-10" @click.native.prevent="searching()">查询</el-button>
         <el-button type="" size="mini" icon="" class="w-24 h-10" @click.native.prevent="resetTemp()">重置</el-button>
       </div>

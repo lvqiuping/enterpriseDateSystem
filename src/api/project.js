@@ -41,3 +41,24 @@ export function GetProjectSingleInfos(query) {
     params: query
   })
 }
+export function GetProjectContacts(query) {
+  return request({
+    url: '/api/Project/GetProjectContacts',
+    method: 'get',
+    params: query
+  })
+}
+export function GetProjectDoneAcceptRecs(query) {
+  return request({
+    url: '/api/Project/GetProjectDoneAcceptRecs',
+    method: 'get',
+    params: query
+  })
+}
+export function GetProjectDoneAccepts(query) {
+  return request({
+    url: '/api/Project/GetProjectDoneAccepts',
+    method: 'get',
+    params: query
+  })
+}

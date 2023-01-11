@@ -15,13 +15,13 @@
 <script>
 import path from 'path'
 import { isExternal } from '@/utils/validate'
-import Item from './Item'
+// import Item from './Item'
 import AppLink from './Link'
 import FixiOSBug from './FixiOSBug'
 
 export default {
   name: 'SidebarItem',
-  components: { Item, AppLink },
+  components: { AppLink },
   mixins: [FixiOSBug],
   props: {
     item: {

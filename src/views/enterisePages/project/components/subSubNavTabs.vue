@@ -10,10 +10,10 @@
       <monomeri-information :projectCode="projectCode" />
     </div>
     <div v-else-if="subActiveName === '竣工验收备案信息'">
-      <filing-information />
+      <filing-information :projectCode="projectCode"/>
     </div>
     <div v-else-if="subActiveName === '竣工验收信息'">
-      <acceptance-information />
+      <acceptance-information :projectCode="projectCode"/>
     </div>
   </div>
 </template>
@@ -35,7 +35,6 @@ export default {
     'subActiveName': {
       immediate: true,
       handler(newVal, oldValue) {
-        console.log('newValzhe', newVal)
         this.subActiveName = newVal
       }
     }

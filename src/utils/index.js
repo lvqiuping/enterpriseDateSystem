@@ -137,3 +137,21 @@ export function getList(obj, api, params) {
     }
   })
 }
+
+export function timestampToTime(timestamp) {
+  // var date = new Date(timestamp * 1000)// 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+  const date = new Date(parseInt(timestamp))
+  const Y = date.getFullYear()
+  let M = date.getMonth() + 1
+  M = M < 10 ? ('0' + M) : M
+  let D = date.getDate()
+  D = D < 10 ? ('0' + D) : D
+  let h = date.getHours()
+  h = h < 10 ? ('0' + h) : h
+  let m = date.getMinutes()
+  m = m < 10 ? ('0' + m) : m
+  let s = date.getSeconds()
+  s = s < 10 ? ('0' + s) : s
+
+  return Y + '-' + M + '-' + D + '\xa0' + h + ':' + m + ':' + s
+}
