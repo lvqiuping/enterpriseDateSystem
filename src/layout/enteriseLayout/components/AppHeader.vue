@@ -253,15 +253,42 @@ export default {
   padding: 0
 }
 ::v-deep .searchBox .el-form{
-  margin: 0!important;
-}
-::v-deep .searchBox .el-form-item {
-  margin: 0!important;
+  margin: 10px!important;
 }
 ::v-deep .el-input--suffix .el-input__inner{
   width: 360px;
 }
+::v-deep .el-tabs--border-card{
+  background: none;
+  border: none;
+}
+::v-deep .el-tabs--border-card>.el-tabs__header{
+  background-color: transparent;
+  border-bottom: none;
+}
+::v-deep .el-tabs__content{
+  background: #fff;
+  border-radius: 0 5px 5px 5px;
+}
+::v-deep .el-tabs--border-card>.el-tabs__header .el-tabs__item{
+  color: #fff;
+  background: #0082ff;
+  margin-right: 10px;
+}
+::v-deep .el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active{
+  color: #409EFF;
+  background: #fff;
+}
+::v-deep .el-tabs__nav-wrap{
+  margin-bottom: 0;
+}
+::v-deep .el-form-item{
+  margin: 0;
+}
+::v-deep .el-input__inner{
+  border: none;
+}
 .searchBox{
-  margin: 10px;
+  margin: 0px;
 }
 </style>

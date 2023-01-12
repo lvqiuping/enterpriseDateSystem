@@ -137,23 +137,7 @@ export default {
       ]
     }
   },
-  watch: {
-    'dataType': {
-      handler(newValue, oldValue) {
-        console.log('newValue', newValue)
-        // if (newValue) {
-        //   this.getPageList()
-        // }
-      }
-    },
-    'keywords': {
-      handler(newValue, oldValue) {
-        console.log('newValue2', newValue)
-      }
-    }
-  },
   created() {
-    console.log('进来')
     this.dataType = this.$route.query.dataType
     this.keywords = this.$route.query.keywords
     this.getPageList()
