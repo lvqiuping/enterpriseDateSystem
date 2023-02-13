@@ -42,7 +42,7 @@ export default {
           value: 'comName',
           show: true,
           type: 'router',
-          path: 'sInfos'
+          path: 'enteriseData/eInfos'
         },
         {
           label: '信用代码',
@@ -74,8 +74,9 @@ export default {
           label: '姓名',
           value: 'perName',
           show: true,
+          id: 'id', // 好神奇，可以传递参数id到公共组件，然后进入详情
           type: 'router',
-          path: 'sInfos'
+          path: 'staff/sInfos'
         },
         {
           label: '身份证号',
@@ -84,8 +85,14 @@ export default {
           type: 'text'
         },
         {
-          label: '注册类别',
-          value: 'regMajorName',
+          label: '证书名称',
+          value: 'cerName',
+          show: true,
+          type: 'text'
+        },
+        {
+          label: '证书专业',
+          value: 'cerMajor',
           show: true,
           type: 'text'
         },
@@ -106,9 +113,10 @@ export default {
         {
           label: '项目名称',
           value: 'projectName',
+          projectCode: 'projectCode', // 传给公共组件，然后进入详情，同id
           show: true,
           type: 'router',
-          path: 'sInfos'
+          path: 'project/pInfos'
         },
         {
           label: '项目编号',

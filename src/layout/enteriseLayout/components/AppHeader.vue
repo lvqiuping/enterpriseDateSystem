@@ -207,7 +207,7 @@ export default {
       var query = { keywords: v.keywords, dataType: this.dataType }
       console.log(this.$route.path)
       console.log('query2', query)
-      // return
+      // searchCopy 是一个中转作用，当在search页面的时候，跳转一下才可以触发方法
       if (this.$route.path !== '/search') {
         this.$router.replace({ name: 'search', query: query })
       } else {

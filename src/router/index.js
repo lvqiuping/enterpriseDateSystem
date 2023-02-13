@@ -55,118 +55,137 @@ export const constantRoutes = [
       meta: { title: '首页' }
     }]
   },
+  // {
+  //   path: '/example',
+  //   component: Layout,
+  //   redirect: '/example/list',
+  //   name: 'Example',
+  //   meta: {
+  //     title: 'Example',
+  //     icon: 'el-icon-s-help'
+  //   },
+  //   children: [
+  //     {
+  //       path: 'edit/:id(\\d+)',
+  //       component: () => import('@/views/example/edit'),
+  //       name: 'EditArticle',
+  //       meta: { title: 'Edit Article', noCache: true, activeMenu: '/example/list' },
+  //       hidden: true
+  //     },
+  //     {
+  //       path: 'list',
+  //       component: () => import('@/views/example/list'),
+  //       name: 'ArticleList',
+  //       meta: { title: 'Article List', icon: 'list' }
+  //     }
+  //   ]
+  // },
   {
     path: '/enteriseData',
     component: Layout,
-    redirect: '/enteriseData',
+    redirect: '/enteriseData/list',
     hidden: false,
+    name: 'EnteriseData',
+    meta: { title: '企业数据' },
     children: [
       {
-        path: 'enteriseData',
-        name: 'enteriseData',
+        path: 'list',
+        name: 'EnteriseDataList',
         component: () => import('@/views/enterisePages/enteriseData/index'),
         meta: { title: '企业数据' }
-      }
-    ]
-  },
-  {
-    path: '/eInfos',
-    component: Layout,
-    redirect: '/enteriseData/eInfos',
-    hidden: true,
-    children: [
+      },
       {
-        path: '/enteriseData/eInfos',
-        name: 'eInfos',
+        path: 'eInfos',
         component: () => import('@/views/enterisePages/enteriseData/sub/index'),
-        meta: { title: '企业数据详情' }
+        name: 'EInfos',
+        meta: { title: '企业数据详情', noCache: true, activeMenu: '/enteriseData/list' },
+        hidden: true
       }
     ]
   },
   {
     path: '/staff',
     component: Layout,
-    redirect: '/staff',
+    redirect: '/staff/list',
     hidden: false,
+    name: 'Staff',
+    meta: { title: '人员数据' },
     children: [
       {
-        path: 'staff',
-        name: 'staff',
+        path: 'list',
+        name: 'StaffList',
         component: () => import('@/views/enterisePages/staff/index'),
         meta: { title: '人员数据' }
-      }
-    ]
-  },
-  {
-    path: '/sInfos',
-    component: Layout,
-    redirect: '/staff/sInfos',
-    hidden: true,
-    children: [
+      },
       {
-        path: '/staff/sInfos',
-        name: 'sInfos',
+        path: 'sInfos',
         component: () => import('@/views/enterisePages/staff/sub/index'),
-        meta: { title: '人员数据详情' }
+        name: 'SInfos',
+        meta: { title: '人员数据详情', noCache: true, activeMenu: '/staff/list' },
+        hidden: true
       }
     ]
   },
   {
     path: '/project',
     component: Layout,
-    redirect: '/project',
+    redirect: '/project/list',
     hidden: false,
+    name: 'Project',
+    meta: { title: '项目数据' },
     children: [
       {
-        path: 'project',
-        name: 'project',
+        path: 'list',
+        name: 'ProjectList',
         component: () => import('@/views/enterisePages/project/index'),
         meta: { title: '项目数据' }
-      }
-    ]
-  },
-  {
-    path: '/pInfos',
-    component: Layout,
-    redirect: '/project/pInfos',
-    hidden: true,
-    children: [
+      },
       {
-        path: '/project/pInfos',
-        name: 'pInfos',
+        path: 'pInfos',
         component: () => import('@/views/enterisePages/project/sub/index'),
-        meta: { title: '项目数据详情' }
+        name: 'PInfos',
+        meta: { title: '项目数据详情', noCache: true, activeMenu: '/project/list' },
+        hidden: true
       }
     ]
   },
   {
     path: '/statistics',
     component: Layout,
-    redirect: '/statistics',
-    hidden: false,
+    redirect: '/statistics/list',
+    hidden: true,
+    name: 'Statistics',
+    meta: { title: '数据统计' },
     children: [
       {
-        path: 'statistics',
-        name: 'statistics',
+        path: 'list',
+        name: 'StatisticsList',
         component: () => import('@/views/enterisePages/statistics/index'),
         meta: { title: '数据统计' }
-      }
-    ]
-  },
-  {
-    path: '/tInfos',
-    component: Layout,
-    redirect: '/staff/tInfos',
-    hidden: true,
-    children: [
+      },
       {
-        path: '/staff/tInfos',
-        name: 'tInfos',
+        path: 'tInfos',
         component: () => import('@/views/enterisePages/statistics/sub/index'),
-        meta: { title: '数据统计详情' }
+        name: 'TInfos',
+        meta: { title: '数据统计详情', noCache: true, activeMenu: '/statistics/list' },
+        hidden: true
       }
     ]
   },
+  // {
+  //   path: '/tInfos',
+  //   component: Layout,
+  //   redirect: '/staff/tInfos',
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: '/staff/tInfos',
+  //       name: 'tInfos',
+  //       component: () => import('@/views/enterisePages/statistics/sub/index'),
+  //       meta: { title: '数据统计详情' }
+  //     }
+  //   ]
+  // },
   {
     path: '/search',
     component: Layout,

@@ -72,7 +72,7 @@ export default {
         {
           label: '姓名',
           value: 'perName',
-          id: 'id', // 好神奇
+          id: 'id', // 好神奇，可以传递参数id到公共组件，然后进入详情
           show: true,
           type: 'router',
           path: 'sInfos'
@@ -84,8 +84,14 @@ export default {
           type: 'text'
         },
         {
-          label: '注册类别',
-          value: 'regMajorName',
+          label: '证书名称',
+          value: 'cerName',
+          show: true,
+          type: 'text'
+        },
+        {
+          label: '证书专业',
+          value: 'cerMajor',
           show: true,
           type: 'text'
         },

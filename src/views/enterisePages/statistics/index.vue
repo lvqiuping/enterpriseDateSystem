@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="app-container">
     <basic-table
       :table-title="tableTitle"
@@ -102,4 +102,4 @@ export default {
     }
   }
 }
-</script>
+</script> -->

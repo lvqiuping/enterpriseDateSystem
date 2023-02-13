@@ -65,7 +65,7 @@ export default {
         {
           label: '项目名称',
           value: 'projectName',
-          projectCode: 'projectCode',
+          projectCode: 'projectCode', // 传给公共组件，然后进入详情，同id
           show: true,
           type: 'router',
           path: 'pInfos'
