@@ -45,9 +45,43 @@ export default {
       // 3. 设置图表 option
       var option = {
         geo: {
-          type: 'map',
-          map: 'china' // 使用 registerMap 注册的地图名称
-        }
+          type: "map",
+          map: "china",
+          label: {
+            // label 设置文本标签的显示格式，去掉不影响显示地图
+            normal: {
+              color: "#000000",
+              show: true //显示省份名称
+            }
+          }
+        },
+        title: {
+          text: '全国建筑公共大数据',
+          subtext: '统计时间：(2022-09.01-至今)',
+          left: 'center',
+          textStyle: { fontSize: 28 }
+        },
+        legend: {
+          orient: 'vertical',
+          top: 50,
+          left: 'left',
+          data: ['1', '2']
+        },
+        series: [
+          {
+            name: "在地图中显示散点图",
+            type: "scatter",
+            coordinateSystem: "geo", //设置坐标系为 geo
+            data: [
+              //这里放标注点的坐标[{name: "北京",value: [116.46, 39.92]}]
+              { name: "北京", value: [116.41995, 40.18994] },
+              { name: "郑州", value: [113.665412, 34.757975] },
+              { name: "天津", value: [117.205126, 39.034933] },
+              { name: "昆明", value: [102.81844, 24.906231] },
+              { name: "广州", value: [113.26453, 23.155008] },
+            ]
+          }
+        ]
       }
       console.log('option1:', option)
 
@@ -68,14 +102,20 @@ export default {
         series: [
           {
             type: 'map',
-            map: 'china' // 使用 registerMap 注册的地图名称
+            map: 'china' // 使用 registerMap 注册的地图名称,
+            // data: [
+            //   //这里放标注点的坐标[{name: "北京",value: [116.46, 39.92]}]
+            //   { name: "北京", value: [116.41995, 40.18994] },
+            //   { name: "郑州", value: [113.665412, 34.757975] },
+            //   { name: "天津", value: [117.205126, 39.034933] },
+            //   { name: "昆明", value: [102.81844, 24.906231] },
+            //   { name: "广州", value: [113.26453, 23.155008] }
+            // ]
           }
         ]
       }
-      console.log('option2:', option2)
-
       // 4. 显示地图
-      this.myChart.setOption(option2) // 用 option 和 option2 效果一样
+      this.myChart.setOption(option) // 用 option 和 option2 效果一样
     }
   }
 }

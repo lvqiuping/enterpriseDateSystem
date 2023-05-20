@@ -9,6 +9,7 @@
             clearable
             :placeholder="field.placeholder? field.placeholder : field.label"
             @keyup.enter.native="searching()"
+            @clear="searching()"
           />
         </el-form-item>
         <el-form-item v-if="field.type === 'radio'" class="flex mr-4">
@@ -51,15 +52,14 @@ export default {
       }
     }
   },
-  watch: {
-    // 监听对象temp，
-    temp: {
-      handler(newVal) {
-        this.$emit('searchFormEmit', newVal)
-      },
-      deep: true
-    }
-  },
+  // watch: {
+  //   temp: {
+  //     handler(newVal) {
+  //       this.$emit('searchFormEmit', newVal)
+  //     },
+  //     deep: true
+  //   }
+  // },
   methods: {
     getRadioForm(v) {
       this.temp.radioJoin = v

@@ -200,7 +200,7 @@ export default {
       }
     },
     searchFormEmit(v) {
-      if (v.keywords === undefined) {
+      if (v.keywords === undefined || !v.keywords) {
         TipsBox('warning', '请输入关键词')
         return
       }

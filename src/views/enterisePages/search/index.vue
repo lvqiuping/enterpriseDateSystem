@@ -4,6 +4,7 @@
       :table-title="listQuery.dataType === 0 ? tableTitle0 : listQuery.dataType === 1 ? tableTitle1 :tableTitle2"
       :table-data="tableData"
       :loading="loading"
+      :search-form="searchForm"
       @refresh="getPageList()"
     />
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageIndex" :limit.sync="listQuery.pageSize" @pagination="getPageList()" />
@@ -21,6 +22,9 @@ export default {
   components: { BasicTable, Pagination },
   data() {
     return {
+      searchForm: {
+        show: false
+      },
       dataType: 0,
       keywords: '',
       loading: false,
