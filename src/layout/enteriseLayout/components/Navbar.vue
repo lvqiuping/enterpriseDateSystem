@@ -1,7 +1,7 @@
 <template>
-  <div v-show="top" class="navbar my-4 flex justify-between items-center">
+  <div v-show="top" class="navbar my-2 flex justify-between items-center">
     <breadcrumb class="breadcrumb-container" />
-    <div class="flex justify-between items-center">手机查看<el-image :src="eCodeImg" class="w-6 h-6 ml-2" /></div>
+    <div class="flex justify-between items-center text-sm">手机查看<el-image :src="eCodeImg" class="w-6 h-6 ml-2" /></div>
   </div>
 </template>
 

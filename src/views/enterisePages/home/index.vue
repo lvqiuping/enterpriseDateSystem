@@ -23,14 +23,14 @@
       </el-card>
       <el-card shadow="hover" class="mb-4">
         <div slot="header" class="clearfix">
-          <span class="font-semibold">企业类型</span>
+          <span class="">企业类型</span>
         </div>
         <div class="mb-2 grid grid-cols-2 grid-rows-2 text-center">
           <el-card v-for="(item, index) in comTypeList" :key="index" :body-style="{ padding: '0px' }" shadow="hover" class="border-0 p-2 cursor-pointer">
             <img :src="item.url" class="w-16 h-auto m-auto">
             <div>
-              <div class="text-blue-400 text-xl my-2">{{ item.title }}</div>
-              <div class="bottom clearfix text-sm">
+              <div class="text-blue-400 my-2">{{ item.title }}</div>
+              <div class="bottom clearfix text-xs px-4">
                 {{ item.content }}
               </div>
             </div>
@@ -39,7 +39,7 @@
       </el-card>
       <el-card shadow="hover" class="mb-4">
         <div slot="header" class="clearfix">
-          <span class="font-semibold">人员资质</span>
+          <span class="">人员资质</span>
           <div style="float: right;">
             <el-select v-model="typeValue" :placeholder="options[0].label" v-loading="loading" @change="getType($event)">
               <el-option
@@ -55,7 +55,7 @@
       </el-card>
       <el-card shadow="hover">
         <div slot="header" class="clearfix">
-          <span class="font-semibold">项目数据</span>
+          <span class="">项目数据</span>
         </div>
         <div class="flex justify-center items-center">
           <e-bar
@@ -72,8 +72,8 @@
       </el-card>
       <el-card shadow="hover">
         <div slot="header" class="clearfix">
-          <span class="font-semibold">企业数据</span>
-          <div>单位（万）</div>
+          <span class="">企业数据</span>
+          <div class="text-xs mt-2" style="color: #606266">单位（万）</div>
         </div>
         <div class="flex justify-center items-center">
           <e-bar

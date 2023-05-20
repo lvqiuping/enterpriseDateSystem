@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="isSecondNav? 'sub' : ''">
+    <div :class="isSecondNav? 'sub' : ''" class="mb-4">
       <el-tabs v-model="activeNames" @tab-click="handleClick">
         <el-tab-pane v-for="(item, index) in tabsList" :key="index" :label="item.count? item.name + '('+item.count+')' : item.name" :name="String(item.name)" :data-id="item.id" lazy>
           <span v-if="item.url" slot="label">
@@ -51,6 +51,10 @@ export default {
 <style scoped>
 ::v-deep .el-tabs__nav-wrap::after{
   height: 0;
+}
+::v-deep .el-tabs__item{
+ font-size: 16px!important;
+ font-weight: normal!important;
 }
 .sub{
   margin: 20px 0;

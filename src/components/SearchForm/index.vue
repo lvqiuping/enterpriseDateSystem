@@ -1,9 +1,9 @@
 <template>
   <div>
-    <el-form v-show="searchForm.show" ref="searchForm" :model="temp" label-position="" label-width="" class="flex flex-wrap m-4 mt-8">
+    <el-form v-show="searchForm.show" ref="searchForm" :model="temp" label-position="" label-width="" class="flex flex-wrap items-center m-8">
       <!-- <template> -->
-      <div v-for="(field, index) in searchForm.fields" :key="index">
-        <el-form-item v-if="field.type === 'input'" :label="field.label" class="flex mr-4">
+      <div v-for="(field, index) in searchForm.fields" :key="index" class="m-2">
+        <el-form-item v-if="field.type === 'input'" :label="field.label" class="flex mr-4 mb-0">
           <el-input
             v-model.trim="temp[field.name]"
             clearable
@@ -12,12 +12,12 @@
             @clear="searching()"
           />
         </el-form-item>
-        <el-form-item v-if="field.type === 'radio'" class="flex mr-4">
+        <el-form-item v-if="field.type === 'radio'" class="flex mr-4 mb-0">
           <el-radio-group v-model="temp[field.name]" @change="getRadioForm">
             <el-radio-button :label="field.value" plain>{{ field.label }}</el-radio-button>
           </el-radio-group>
         </el-form-item>
-        <el-form-item v-if="field.type === 'select'" clearable class="flex mr-4">
+        <el-form-item v-if="field.type === 'select'" clearable class="flex mr-4 mb-0">
           <span class="mr-4">{{ field.label }}</span>
           <el-select v-model="temp[field.name]" placeholder="请选择">
             <el-option

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="flex justify-between border border-b-0">
+  <div class="border">
+    <div class="flex justify-between">
       <div v-if="isOperationBtn">
         <operation-button
           :button-group="buttonGroup"

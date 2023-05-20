@@ -59,7 +59,7 @@ export default {
           text: '全国建筑公共大数据',
           subtext: '统计时间：(2022-09.01-至今)',
           left: 'center',
-          textStyle: { fontSize: 28 }
+          textStyle: { fontSize: 20, fontWeight: 'normal' }
         },
         legend: {
           orient: 'vertical',
@@ -88,7 +88,7 @@ export default {
       // 只显示一个地图的时候，用option,option2都可以。如果要在地图上加散点图，用 option
       var option2 = {
         title: {
-          text: '全国建筑公共大数据',
+          text: '全国建筑公共大数据3',
           subtext: '统计时间：(2022-09.01-至今)',
           left: 'center',
           textStyle: { fontSize: 28 }

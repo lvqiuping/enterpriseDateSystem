@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div v-for="(item, index) in companyInfosList" :key="index" class="border my-6">
-      <div class="pt-6 text-xl font-semibold" style="margin-left: 50px"> {{ item.cerName }}</div>
+      <div class="p-6 text-2xl"> {{ item.cerName }}</div>
       <basic-infos :company-infos="item" :infos-list="InfosList" :cols-two="false" />
     </div>
     <div v-if="isShow" class="foot my-10">

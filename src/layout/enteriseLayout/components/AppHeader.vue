@@ -46,12 +46,12 @@
           </div>
           <div class="flex items-center">
             <div class="right-menu flex items-center ml-4">
-              <div class="text-gray-200 mr-2">{{ userName }}</div>
-              <el-dropdown class="" trigger="click">
+              <div class="text-gray-200 mr-2 text-lg">{{ userName }}</div>
+              <el-dropdown class=""  trigger="click">
                 <div class="text-gray-200">
                   <i class="el-icon-caret-bottom" />
                 </div>
-                <el-dropdown-menu slot="dropdown" class="">
+                <el-dropdown-menu slot="dropdown" class="" >
                   <router-link to="/">
                     <el-dropdown-item>
                       首页
@@ -274,6 +274,7 @@ export default {
   color: #fff;
   background: #0082ff;
   margin-right: 10px;
+  font-size: 16px;
 }
 ::v-deep .el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active{
   color: #409EFF;

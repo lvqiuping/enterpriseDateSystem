@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-      <div class="subnavbox my-8">
+      <div class="my-8">
         <sub-nav-tabs :tabs-list="tabsList" :active-name="activeName" :company-name="CompanyName" @getActiveSubNameEmit="getActiveSubNameEmit" />
       </div>
     </div>
